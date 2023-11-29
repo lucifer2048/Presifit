@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Accelerometer } from 'expo-sensors';
-import { View, Text, Dimensions, StyleSheet } from 'react-native';
+import { View, Text, Dimensions, StyleSheet,Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import CircularProgress from "react-native-circular-progress-indicator";
@@ -8,7 +8,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { Goals, Leaderboard, Community, Settings,Events } from './Components';
-
+import { SplashScreen } from 'expo';
 
 const THRESHOLD = 1.4;
 const STEP_DELAY = 500;
@@ -34,6 +34,28 @@ const screenOptions = {
 }
 
 export default function App() {
+  const [isAppReady, setAppReady] = useState(false);
+
+  useEffect(() => {
+    // Simulate an asynchronous operation (e.g., fetching data)
+    setTimeout(() => {
+      setAppReady(true); // Set app ready state to true after the operation
+    }, 2000); // Simulated delay of 3 seconds
+  }, []);
+
+  if (!isAppReady) {
+    return (
+      <View style={styles.splashScreenContainer}>
+        
+        <Image source={require('./images/run.jpg')} style={styles.logo} />
+        <Text style={styles.loadingText}>Presifit</Text>
+        <FontAwesome style={styles.arrow} name="arrow-circle-right" size={50} color="black" />
+        
+      </View>
+    );
+  }
+
+  
   return (
     <NavigationContainer>
       <Tab.Navigator screenOptions={screenOptions}>
@@ -201,18 +223,33 @@ const StepCounterScreen = () => {
 };
 const styles = StyleSheet.create({
 
-  datePicker: {
+  splashScreenContainer: {
+    flex: 1,
+    // justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
-    flexDirection: 'row',
-    justifyContent: 'center',
+    backgroundColor: '#fff', // Adjust as per your design
   },
-  date: {
-    color: '#000',
-    fontWeight: '500',
-    fontSize: 20,
-    marginHorizontal: 20,
+  logo: {
+    // width: 500,
+    height: 700,
+    resizeMode:'contain',
+    
   },
+  loadingText: {
+    position:"absolute",
+    // marginTop: 20,
+    fontSize: 40,
+    marginTop:70,
+    fontWeight: 'bold',
+    flex:1,
+    justifyContent:"flex-end"
+  },
+  arrow:{
+    // position:"absolute",
+    marginBottom:50,
+    justifyContent:"flex-start",
+    flex:1,
+  }
 });
 
 

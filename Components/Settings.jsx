@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
+import { View, TouchableOpacity, StyleSheet, SafeAreaView, } from 'react-native';
 import { List, Divider } from 'react-native-paper';
 
 const SettingsSection = ({ title, options }) => {
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#edf2f4',
-    marginBottom:51
+    marginBottom: 51
   },
   content: {
     flex: 1,
