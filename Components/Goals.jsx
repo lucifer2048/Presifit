@@ -63,7 +63,7 @@ const TaskList = () => {
           onChangeText={(text) => setInputTask(text)}
         />
         <TouchableOpacity style={styles.addButton} onPress={handleAddTask}>
-          <Text style={styles.addButtonText}>Add</Text>
+          <Text style={styles.addButtonText}>Add Goals</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -104,24 +104,24 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 20,
+    padding: 10,
   },
   input: {
     flex: 1,
-    height: 40,
+    padding: 12,
     borderWidth: 1,
-    borderColor: '#000',
-    borderRadius: 8,
-    paddingHorizontal: 10,
+    borderColor: '#3d405b',
+    borderRadius: 24,
+    marginRight:5
   },
   addButton: {
-    backgroundColor: '#3498db',
-    padding: 10,
-    borderRadius: 8,
-    marginLeft: 10,
+    backgroundColor: '#3d405b',
+    padding: 12,
+    borderRadius: 24,
   },
   addButtonText: {
-    color: 'white',
+    fontSize: 16,
+    color: '#fff',
   },
 });
 
