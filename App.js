@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Accelerometer } from 'expo-sensors';
-import { View, Text,Dimensions,StyleSheet } from 'react-native';
+import { View, Text, Dimensions, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import CircularProgress from "react-native-circular-progress-indicator";
 import { MaterialIcons } from '@expo/vector-icons';
-import { Ionicons,AntDesign } from '@expo/vector-icons';
+import { Ionicons, AntDesign } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
-
+import { Goals, Leaderboard, Community, Settings,Events } from './Components';
 
 
 const THRESHOLD = 1.4;
@@ -21,14 +21,14 @@ const screenOptions = {
   tabBarHideOnKeyboard: true,
   headerShown: true,
   tabBarStyle: {
-      position: 'absolute',
-      bottom: 2,
-      left: 2,
-      right: 2,
-      elevation: 0.5,
-      height: 50,
-      backgroundColor:"transparent",
-      backgroundColorOpacity:0.1,
+    position: 'absolute',
+    bottom: 2,
+    left: 2,
+    right: 2,
+    elevation: 0.5,
+    height: 50,
+    backgroundColor: "transparent",
+    backgroundColorOpacity: 0.1,
   }
 }
 
@@ -42,7 +42,7 @@ export default function App() {
           options={{
             tabBarIcon: ({ focused }) => {
               return <Ionicons name={focused ? "home" : "home"}
-              size={focused? 28:24} color={focused? "black":"grey"}
+                size={focused ? 28 : 24} color={focused ? "black" : "grey"}
               />
             }
           }}
@@ -52,31 +52,39 @@ export default function App() {
           component={Community}
           options={{
             tabBarIcon: ({ focused }) => {
-              return <Ionicons name="people-sharp" size={focused? 28:24} color={focused? "black":"grey"} />
+              return <Ionicons name="people-sharp" size={focused ? 28 : 24} color={focused ? "black" : "grey"} />
             }
           }} />
-          
-          <Tab.Screen name="Presifit Leaderboard"
+
+        <Tab.Screen name="Presifit Leaderboard"
           component={Leaderboard}
           options={{
             tabBarIcon: ({ focused }) => {
-              return <MaterialIcons name="leaderboard"  size={focused? 28:24} color={focused? "black":"grey"} />
+              return <MaterialIcons name="leaderboard" size={focused ? 28 : 24} color={focused ? "black" : "grey"} />
             }
           }} />
-        
+
         <Tab.Screen name="Presifit Goals"
           component={Goals}
           options={{
             tabBarIcon: ({ focused }) => {
-              return <FontAwesome name="tasks"  size={focused? 28:24} color={focused? "black":"grey"} />
+              return <FontAwesome name="tasks" size={focused ? 28 : 24} color={focused ? "black" : "grey"} />
             }
           }} />
-        
+
+        <Tab.Screen name="Presifit Events"
+          component={Events}
+          options={{
+            tabBarIcon: ({ focused }) => {
+              return <MaterialIcons name="emoji-events" size={focused ? 28 : 24} color={focused ? "black" : "grey"} />
+            }
+          }} />
+
         <Tab.Screen name="Settings"
           component={Settings}
           options={{
             tabBarIcon: ({ focused }) => {
-              return <Ionicons name="settings-sharp"  size={focused? 28:24} color={focused? "black":"grey"} />
+              return <Ionicons name="settings-sharp" size={focused ? 28 : 24} color={focused ? "black" : "grey"} />
             }
           }}
         />
@@ -145,7 +153,7 @@ const StepCounterScreen = () => {
       <Text style={{ fontSize: 50, textAlign: 'left', fontWeight: '400' }}>Hey, {user}</Text>
       <Text style={{ fontSize: 20, marginTop: 10 }}>Your goal is {goal}</Text>
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      {/* <View style={styles.datePicker}>
+        {/* <View style={styles.datePicker}>
         <AntDesign
           onPress={() => changeDate(-1)}
           name="left"
@@ -163,7 +171,7 @@ const StepCounterScreen = () => {
         />
         
       </View> */}
-      {/* <Text style={{ fontSize: 20, marginTop: 20 }}>Steps between dates: {stepsBetweenDates}</Text> */}
+        {/* <Text style={{ fontSize: 20, marginTop: 20 }}>Steps between dates: {stepsBetweenDates}</Text> */}
         <CircularProgress
           value={stepCount}
           maxValue={goal}
@@ -184,14 +192,14 @@ const StepCounterScreen = () => {
           <Text style={{ fontSize: 20, marginTop: 10, borderWidth: 1, borderRadius: 10, padding: 10 }}>Calories burned so far {caloriesBurnt} calories</Text>
         </View>
       </View>
-      
+
       {/* <Button title="Set Start Date" onPress={() => setStartDate(new Date())} />
       <Button title="Set End Date" onPress={() => setEndDate(new Date())} /> */}
     </View>
   );
 };
 const styles = StyleSheet.create({
-  
+
   datePicker: {
     alignItems: 'center',
     padding: 20,
@@ -206,35 +214,6 @@ const styles = StyleSheet.create({
   },
 });
 
-const Settings = () => {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Settings Screen</Text>
-    </View>
-  );
 
-};
-const Community = () => {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Settings Screen</Text>
-    </View>
-  );
 
-};
-const Leaderboard = () => {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Settings Screen</Text>
-    </View>
-  );
 
-};
-const Goals = () => {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Goals Screen</Text>
-    </View>
-  );
-
-};
