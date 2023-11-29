@@ -37,8 +37,8 @@ const Settings = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#a8dadc',
-    marginBottom:50
+    backgroundColor: '#edf2f4',
+    marginBottom:51
   },
   content: {
     flex: 1,
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   },
   section: {
     width: '100%',
-    backgroundColor: '#fff',
+    backgroundColor: '#a3c4f3',
     marginBottom: 10,
     borderRadius: 10,
     elevation: 3,

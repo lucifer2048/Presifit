@@ -1,42 +1,50 @@
 import React, { useState } from 'react';
-import {
- View,
- Text,
- FlatList,
- StyleSheet,
- TouchableOpacity,
- Alert,
- TextInput,
-} from 'react-native';
+import { View, Text, FlatList, StyleSheet, TouchableOpacity, Alert, TextInput } from 'react-native';
 
-const data = [
- { id: '1', name: 'Walkathons' },
- { id: '2', name: 'Cyclethons' },
- { id: '3', name: 'Biking' },
- { id: '4', name: 'Brisk Walking' },
-];
+const generateRandomDate = () => {
+  const startDate = new Date(2023, 10, 1); // Replace with your desired start date
+  const endDate = new Date(2023, 11, 31); // Replace with your desired end date
+  const randomTime = startDate.getTime() + Math.random() * (endDate.getTime() - startDate.getTime());
+  return new Date(randomTime);
+};
 
-const Event = ({ navigation }) => {
- const [events, setEvents] = useState(data);
- const [input, setInput] = useState('');
+const generateRandomEvents = () => {
+  const data = [
+    { id: '1', name: 'Walkathons',place:'Bangalore' },
+    { id: '2', name: 'Cyclethons',place:'Bangalore' },
+    { id: '3', name: 'Biking',place:'Bangalore' },
+    { id: '4', name: 'Brisk Walking',place:'Bangalore' },
+  ];
 
- const renderItem = ({ item }) => {
+  return data.map((event) => ({
+    ...event,
+    date: generateRandomDate(),
+  }));
+};
+
+const Events= ({ navigation }) => {
+  const [events, setEvents] = useState(generateRandomEvents());
+  const [input, setInput] = useState('');
+
+  const renderItem = ({ item }) => {
     return (
       <TouchableOpacity style={styles.item}>
         <Text style={styles.title}>{item.name}</Text>
+        <Text style={styles.title2}>{item.date.toDateString()}</Text>
+        <Text style={styles.title2}>{item.place? item.place:"Bangalore"}</Text>
       </TouchableOpacity>
     );
- };
+  };
 
- const handleAddEvent = () => {
+  const handleAddEvent = () => {
     if (input.trim()) {
-      const newEvent = { id: events.length + 1, name: input.trim() };
+      const newEvent = { id: `${events.length + 1}`, name: input.trim(), date: generateRandomDate() };
       setEvents([...events, newEvent]);
       setInput('');
     }
- };
+  };
 
- const handleDeleteEvent = (id) => {
+  const handleDeleteEvent = (id) => {
     Alert.alert(
       'Delete Event',
       'Are you sure you want to delete this event?',
@@ -55,16 +63,11 @@ const Event = ({ navigation }) => {
       ],
       { cancelable: false }
     );
- };
+  };
 
- return (
+  return (
     <View style={styles.container}>
-      <FlatList
-        data={events}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-        extraData={events}
-      />
+      <FlatList data={events} renderItem={renderItem} keyExtractor={(item) => item.id} />
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
@@ -77,48 +80,58 @@ const Event = ({ navigation }) => {
         </TouchableOpacity>
       </View>
     </View>
- );
+  );
 };
 
 const styles = StyleSheet.create({
- container: {
+  container: {
     flex: 1,
     paddingTop: 22,
- },
- item: {
-    padding: 10,
-    height: 44,
-    backgroundColor: '#f9c2ff',
+    backgroundColor: '#a3c4f3',
+    marginBottom:51
+  },
+  item: {
+    // padding: 10,
+    height: 150,
+    backgroundColor: '#fff',
     marginVertical: 8,
     marginHorizontal: 16,
     borderRadius: 24,
- },
- title: {
-    fontSize: 16,
- },
- inputContainer: {
+    flex:0.5,
+    alignItems:"center",
+    justifyContent:"center"
+  },
+  title: {
+    fontSize: 35,
+    padding:10,
+  },
+  title2: {
+    fontSize: 18,
+    padding:10,
+  },
+  inputContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 22,
-    marginBottom: 60,
- },
- input: {
+    padding: 10,
+  },
+  input: {
     flex: 1,
     padding: 12,
     borderWidth: 1,
-    borderColor: '#ffb3e8',
+    borderColor: '#3d405b',
     borderRadius: 24,
- },
- addButton: {
-    backgroundColor: '#ffb3e8',
+    marginRight:5
+  },
+  addButton: {
+    backgroundColor: '#3d405b',
     padding: 12,
     borderRadius: 24,
- },
- addButtonText: {
+  },
+  addButtonText: {
     fontSize: 16,
     color: '#fff',
- },
+  },
 });
 
-export default Event;
+export default Events;

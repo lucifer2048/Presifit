@@ -18,6 +18,7 @@ const user = "Prathyush";
 const goal = 6500;
 const screenOptions = {
   tabBarShowLabel: false,
+  
   tabBarHideOnKeyboard: true,
   headerShown: true,
   tabBarStyle: {
@@ -25,10 +26,10 @@ const screenOptions = {
     bottom: 2,
     left: 2,
     right: 2,
-    elevation: 0.5,
+    elevation: 0,
     height: 50,
     backgroundColor: "transparent",
-    backgroundColorOpacity: 0.1,
+    // backgroundColorOpacity: 0.1,
   }
 }
 
@@ -150,8 +151,8 @@ const StepCounterScreen = () => {
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 30 }}>
-      <Text style={{ fontSize: 50, textAlign: 'left', fontWeight: '400' }}>Hey, {user}</Text>
-      <Text style={{ fontSize: 20, marginTop: 10 }}>Your goal is {goal}</Text>
+      <Text style={{ fontSize: 32, fontWeight: '400',color:"#0466c8"}}>Hey, {user}</Text>
+      <Text style={{ fontSize: 24, marginTop: 10,color:"#0466c8"}}>Your goal for today is {goal} steps</Text>
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         {/* <View style={styles.datePicker}>
         <AntDesign
@@ -176,7 +177,7 @@ const StepCounterScreen = () => {
           value={stepCount}
           maxValue={goal}
           radius={120}
-          textColor={"#ecf0f1"}
+          textColor={"#0466c8"}
           activeStrokeColor={"#bfd200"}
           inActiveStrokeColor={"#84dcc6"}
           activeStrokeSecondaryColor={'#168aad'}
@@ -184,8 +185,8 @@ const StepCounterScreen = () => {
           inActiveStrokeWidth={40}
           activeStrokeWidth={40}
           title={"Step Count"}
-          titleColor={"#000"}
-          titleStyle={{ fontWeight: "300" }}
+          titleColor={"#0466c8"}
+          titleStyle={{ fontWeight: "400" }}
         />
         <View style={{ margin: 10, padding: 10 }}>
           <Text style={{ fontSize: 20, marginTop: 10, borderWidth: 1, borderRadius: 10, padding: 10 }}>Distance covered so far {DistanceCovered} km</Text>
