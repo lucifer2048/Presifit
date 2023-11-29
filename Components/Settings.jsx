@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 import { List, Divider } from 'react-native-paper';
 
 const SettingsSection = ({ title, options }) => {
@@ -20,7 +20,7 @@ const SettingsSection = ({ title, options }) => {
 
 const Settings = () => {
   const profileOptions = ['Edit Profile', 'Change Password'];
-  const appOptions = ['Notifications', 'Theme', 'Language'];
+  const appOptions = ['Notifications', 'Language'];
   const accountOptions = ['Logout', 'Delete Account'];
 
   return (
@@ -51,11 +51,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#a3c4f3',
     marginBottom: 10,
     borderRadius: 10,
-    elevation: 3,
+    elevation: 5,
+    height: 200
   },
   sectionTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontSize: 24,
+    fontWeight: '500',
     paddingLeft: 16,
     paddingBottom: 8,
     color: '#444',
