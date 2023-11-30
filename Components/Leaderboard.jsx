@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet, SafeAreaView } from 'react-native';
+import { View, Text, FlatList, StyleSheet, SafeAreaView,Image } from 'react-native';
 
 const Leaderboard = () => {
   const [leaderboardData, setLeaderboardData] = useState([]);
@@ -7,9 +7,9 @@ const Leaderboard = () => {
   useEffect(() => {
     // Simulated data for multiple users with steps
     const initialData = [
-      { id: 1, name: 'Alice', steps: 7654 },
-      { id: 2, name: 'Bob', steps: 5432 },
-      { id: 3, name: 'Charlie', steps: 9876 },
+      { id: 1, name: 'Alice', steps: 7654,avatar: require('../images/alice.jpg') },
+      { id: 2, name: 'Bob', steps: 5432,avatar: require('../images/Bob.jpg') },
+      { id: 3, name: 'Charlie', steps: 9876,avatar: require('../images/charlie.jpg') },
       // Add more users as needed
     ];
 
@@ -34,6 +34,9 @@ const Leaderboard = () => {
         <View style={styles.userCard}>
           <Text style={styles.name}>{item.name}</Text>
           <Text style={styles.steps}>{item.steps} steps</Text>
+        </View>
+        <View>
+        <Image source={item.avatar} style={styles.avatar} />
         </View>
       </View>
     );
@@ -83,6 +86,7 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: '#a3c4f3',
     height:150,
+    elevation:8
   },
   rankCard: {
     backgroundColor: '#bbdefb',
@@ -93,6 +97,13 @@ const styles = StyleSheet.create({
     color: '#c1121f',
     fontWeight: 'bold',
     fontSize: 30,
+  },
+  avatar: {
+    width: 60,
+    height: 60,
+    borderRadius: 50,
+    marginRight: 10,
+    resizeMode:"cover"
   },
   userCard: {
     flex: 1,

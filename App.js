@@ -17,8 +17,7 @@ const Tab = createBottomTabNavigator();
 const user = "Prathyush";
 const goal = 6500;
 const screenOptions = {
-  tabBarShowLabel: false,
-  
+  tabBarShowLabel: true,
   tabBarHideOnKeyboard: true,
   headerShown: true,
   tabBarStyle: {
@@ -71,7 +70,7 @@ export default function App() {
           }}
         />
 
-        <Tab.Screen name="Presifit Community"
+        <Tab.Screen name="Community"
           component={Community}
           options={{
             tabBarIcon: ({ focused }) => {
@@ -79,7 +78,7 @@ export default function App() {
             }
           }} />
 
-        <Tab.Screen name="Presifit Leaderboard"
+        <Tab.Screen name="Leaderboard"
           component={Leaderboard}
           options={{
             tabBarIcon: ({ focused }) => {
@@ -87,7 +86,7 @@ export default function App() {
             }
           }} />
 
-        <Tab.Screen name="Presifit Goals"
+        <Tab.Screen name="Your Goals"
           component={Goals}
           options={{
             tabBarIcon: ({ focused }) => {
@@ -95,7 +94,7 @@ export default function App() {
             }
           }} />
 
-        <Tab.Screen name="Presifit Events"
+        <Tab.Screen name="Events"
           component={Events}
           options={{
             tabBarIcon: ({ focused }) => {
@@ -211,7 +210,7 @@ const StepCounterScreen = () => {
           titleStyle={{ fontWeight: "400",fontSize:20 }}
         />
         <View style={{ margin: 10, padding: 10 }}>
-          <Text style={{ fontSize: 20, marginTop: 10, borderWidth: 1, borderRadius: 10, padding: 10 }}>Distance covered so far {DistanceCovered} km</Text>
+          <Text style={{ fontSize: 20, marginTop: 10, borderWidth: 1, borderRadius: 10, padding: 10, }}>Distance covered so far {DistanceCovered} km</Text>
           <Text style={{ fontSize: 20, marginTop: 10, borderWidth: 1, borderRadius: 10, padding: 10 }}>Calories burned so far {caloriesBurnt} calories</Text>
         </View>
       </View>

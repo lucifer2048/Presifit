@@ -52,7 +52,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderRadius: 10,
     elevation: 5,
-    height: 200
+    height: 200,
+    elevation:10
   },
   sectionTitle: {
     fontSize: 24,

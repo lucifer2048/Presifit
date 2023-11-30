@@ -99,7 +99,8 @@ const styles = StyleSheet.create({
     borderRadius: 24,
     flex:0.5,
     alignItems:"center",
-    justifyContent:"center"
+    justifyContent:"center",
+    elevation:10
   },
   title: {
     fontSize: 35,

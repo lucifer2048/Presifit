@@ -5,8 +5,9 @@ import { Linking } from 'react-native';
 
 // Your data array
 const data = [
-  { id: '1', username: 'user1', avatar: require('../images/cat.jpg') },
-  { id: '2', username: 'user2', avatar: require('../images/cat.jpg') },
+  { id: '1', username: 'Charlie', avatar: require('../images/charlie.jpg') },
+  { id: '2', username: 'Alice', avatar: require('../images/alice.jpg') },
+  { id: '3', username: 'Bob', avatar: require('../images/Bob.jpg') },
   // Add more data...
 ];
 
@@ -68,6 +69,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     margin: 20,
+    
     // marginTop:50
   },
   searchInput: {
@@ -77,12 +79,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     paddingHorizontal: 10,
+    
   },
   searchButton: {
     backgroundColor: '#3498db',
     padding: 10,
     borderRadius: 8,
     marginLeft: 10,
+    elevation:10
   },
   list: {
     flex: 1,
@@ -104,6 +108,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     height:90,
     borderColor: '#3498db',
+    elevation:8
     
   },
 
@@ -112,11 +117,12 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 50,
     marginRight: 10,
-    resizeMode:"contain"
+    resizeMode:"cover"
   },
   username: {
     fontSize: 16,
     fontWeight: '400',
+    
   },
   inviteContainer: {
     flexDirection: 'col',
@@ -131,6 +137,7 @@ const styles = StyleSheet.create({
     padding: 20,
     marginBottom:15,
     borderRadius: 8,
+    elevation:8
   },
   inviteButton2: {
     flexDirection: 'row',
@@ -139,6 +146,7 @@ const styles = StyleSheet.create({
     padding: 20,
     marginBottom:15,
     borderRadius: 8,
+    elevation:8
     
   },
   inviteText: {

@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 15,
     backgroundColor: '#a3c4f3',
+    elevation:10
   },
   completedTask: {
     textDecorationLine: 'line-through',
