@@ -7,7 +7,7 @@ import CircularProgress from "react-native-circular-progress-indicator";
 import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
-import { Goals, Leaderboard, Community, Settings, Events, Rewards, Consultation } from './Components';
+import { Goals, Leaderboard, Community, Settings, Events, Rewards, Consultation,Company } from './Components';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
@@ -63,7 +63,7 @@ export default function App() {
         <Drawer.Screen name="Settings" component={Settings} />
         <Drawer.Screen name="Consultation" component={Consultation} />
         <Drawer.Screen name="Events" component={Events} />
-        
+        <Drawer.Screen name="About us" component={Company} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
@@ -73,7 +73,7 @@ const TabNavigator = () => {
   return (
     <Tab.Navigator screenOptions={screenOptions}>
       <Tab.Screen
-        name="Presifit"
+        name="Home"
         component={StepCounterScreen}
         options={{
           headerShown: false,

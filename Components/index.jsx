@@ -5,4 +5,6 @@ import Settings from './Settings';
 import Events from './Events';
 import Rewards from './Rewards';
 import Consultation from './Consultation';
-export{Goals,Leaderboard,Community,Settings,Events,Rewards,Consultation };
+import Company from './Company';
+
+export{Goals,Leaderboard,Community,Settings,Events,Rewards,Consultation,Company };
