@@ -7,6 +7,7 @@ import CircularProgress from "react-native-circular-progress-indicator";
 import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
 import { Goals, Leaderboard, Community, Settings, Events, Rewards, Consultation,Company } from './Components';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -108,7 +109,7 @@ const TabNavigator = () => {
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) => {
-            return <FontAwesome name="tasks" size={focused ? 28 : 24} color={focused ? "black" : "grey"} />
+            return <FontAwesome5 name="tasks" size={focused ? 28 : 24} color={focused ? "black" : "grey"} />
           }
         }} />
 
