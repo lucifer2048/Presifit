@@ -228,10 +228,16 @@ const StepCounterScreen = () => {
           titleColor={"#0466c8"}
           titleStyle={{ fontWeight: "600", fontSize: 20 }}
         />
-        <View style={{ margin: 10, padding: 10 }}>
-          <Text style={{ fontSize: 20, marginTop: 10, borderWidth: 1, borderRadius: 10, padding: 15, }}>Distance covered so far {DistanceCovered} km</Text>
-          <Text style={{ fontSize: 20, marginTop: 10, borderWidth: 1, borderRadius: 10, padding: 15 }}>Calories burned so far {caloriesBurnt} calories</Text>
+        <View style={styles.cardContainer}>
+        <View style={styles.card}>
+          <Text style={styles.cardTitle}>Distance Covered</Text>
+          <Text style={styles.cardText}>{DistanceCovered} km</Text>
         </View>
+        <View style={styles.card}>
+          <Text style={styles.cardTitle}>Calories Burned</Text>
+          <Text style={styles.cardText}>{caloriesBurnt} calories</Text>
+        </View>
+      </View>
       </View>
 
       {/* <Button title="Set Start Date" onPress={() => setStartDate(new Date())} />
@@ -267,7 +273,37 @@ const styles = StyleSheet.create({
     marginBottom: 50,
     justifyContent: "flex-start",
     flex: 1,
-  }
+  },
+  cardContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 70,
+  },
+  card: {
+    backgroundColor: '#fff',
+    padding: 15,
+    borderRadius: 10,
+    width: '45%',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    margin:5
+  },
+  cardTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: '#0466c8',
+  },
+  cardText: {
+    fontSize: 28,
+    color: '#333',
+  },
 });
 
 

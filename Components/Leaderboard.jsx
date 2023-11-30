@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   rank: {
-    color: '#c1121f',
+    color: '#072ac8',
     fontWeight: 'bold',
     fontSize: 30,
   },
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   steps: {
-    color: '#ff6700',
+    color: '#072ac8',
     marginTop: 5,
     fontSize: 20,
     fontWeight:"600",
