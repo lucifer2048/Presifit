@@ -88,14 +88,14 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 22,
     backgroundColor: '#48cae4',
-    marginBottom:51
+    // marginBottom:51
   },
   item: {
     // padding: 10,
-    height: 150,
+    height: 120,
     backgroundColor: '#fff',
     marginVertical: 8,
-    marginHorizontal: 16,
+    marginHorizontal: 20,
     borderRadius: 24,
     flex:0.5,
     alignItems:"center",
@@ -103,18 +103,19 @@ const styles = StyleSheet.create({
     elevation:10
   },
   title: {
-    fontSize: 35,
-    padding:10,
+    fontSize: 30,
+    padding:5,
   },
   title2: {
-    fontSize: 18,
-    padding:10,
+    fontSize: 14,
+    padding:5,
   },
   inputContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 10,
+    marginBottom:20
   },
   input: {
     flex: 1,
