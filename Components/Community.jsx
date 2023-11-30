@@ -12,12 +12,12 @@ const data = [
 ];
 
 const Community = () => {
-    const renderUserCard = ({ item }) => (
-      <TouchableOpacity style={styles.card}>
-        <Image source={item.avatar} style={styles.avatar} />
-        <Text style={styles.username}>{item.username}</Text>
-      </TouchableOpacity>
-    );
+  const renderUserCard = ({ item }) => (
+    <TouchableOpacity style={styles.card}>
+      <Image source={item.avatar} style={styles.avatar} />
+      <Text style={styles.username}>{item.username}</Text>
+    </TouchableOpacity>
+  );
 
   const inviteViaWhatsApp = () => {
     Linking.openURL('whatsapp://send?text=Join me in this amazing app! https://yourapp.com');
@@ -33,9 +33,9 @@ const Community = () => {
         <TextInput
           style={styles.searchInput}
           placeholder="Search"
-          // Add search functionality
+        // Add search functionality
         />
-        <TouchableOpacity onPress={() => {}} style={styles.searchButton}>
+        <TouchableOpacity onPress={() => { }} style={styles.searchButton}>
           <AntDesign name="search1" size={24} color="white" />
         </TouchableOpacity>
       </View>
@@ -54,7 +54,7 @@ const Community = () => {
           <FontAwesome name="facebook" size={24} color="white" />
           <Text style={styles.inviteText}>Invite via Facebook</Text>
         </TouchableOpacity>
-    </View >
+      </View >
     </SafeAreaView>
   );
 };
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     margin: 20,
-    
+
     // marginTop:50
   },
   searchInput: {
@@ -79,14 +79,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     paddingHorizontal: 10,
-    
+
   },
   searchButton: {
     backgroundColor: '#3498db',
     padding: 10,
     borderRadius: 8,
     marginLeft: 10,
-    elevation:10
+    elevation: 10
   },
   list: {
     flex: 1,
@@ -103,13 +103,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 15,
     borderRadius: 25,
-    backgroundColor: '#ccdbfd',
+    backgroundColor: '#48cae4',
     marginVertical: 8,
     marginHorizontal: 16,
-    height:90,
+    height: 90,
     borderColor: '#3498db',
-    elevation:8
-    
+    elevation: 8,
   },
 
   avatar: {
@@ -117,37 +116,37 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 50,
     marginRight: 10,
-    resizeMode:"cover"
+    resizeMode: "cover"
   },
   username: {
     fontSize: 16,
     fontWeight: '400',
-    
+
   },
   inviteContainer: {
     flexDirection: 'col',
     justifyContent: 'space-around',
     padding: 20,
-    marginBottom:60,
+    marginBottom: 60,
   },
   inviteButton1: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#29bf12',
     padding: 20,
-    marginBottom:15,
+    marginBottom: 15,
     borderRadius: 8,
-    elevation:8
+    elevation: 8
   },
   inviteButton2: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#3b5998',
     padding: 20,
-    marginBottom:15,
+    marginBottom: 15,
     borderRadius: 8,
-    elevation:8
-    
+    elevation: 8
+
   },
   inviteText: {
     color: '#fff',

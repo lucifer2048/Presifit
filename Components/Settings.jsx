@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   },
   section: {
     width: '100%',
-    backgroundColor: '#a3c4f3',
+    backgroundColor: '#48cae4',
     marginBottom: 10,
     borderRadius: 10,
     elevation: 5,

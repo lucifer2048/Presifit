@@ -74,20 +74,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#979dac',
+    backgroundColor: '#ffffff',
     marginBottom: 51,
   },
   taskItem: {
     flexDirection: 'col',
-    justifyContent: 'space-between',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
+    justifyContent:"center",
     padding: 10,
     borderWidth: 1,
     borderColor: '#cccccc',
     margin: 10,
     height: 100,
     borderRadius: 15,
-    backgroundColor: '#a3c4f3',
+    backgroundColor: '#48cae4',
     elevation:10
   },
   completedTask: {

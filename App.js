@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Accelerometer } from 'expo-sensors';
-import { View, Text, Dimensions, StyleSheet,Image } from 'react-native';
+import { View, Text, Dimensions, StyleSheet, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import CircularProgress from "react-native-circular-progress-indicator";
 import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
-import { Goals, Leaderboard, Community, Settings,Events } from './Components';
-
+import { Goals, Leaderboard, Community, Settings, Events, Rewards, Consultation } from './Components';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const THRESHOLD = 1.4;
 const STEP_DELAY = 500;
-
+const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 const user = "Prathyush";
 const goal = 6500;
@@ -45,73 +46,89 @@ export default function App() {
   if (!isAppReady) {
     return (
       <View style={styles.splashScreenContainer}>
-        
+
         <Image source={require('./images/run.jpg')} style={styles.logo} />
         <Text style={styles.loadingText}>Presifit</Text>
         <FontAwesome style={styles.arrow} name="arrow-circle-right" size={50} color="black" />
-        
+
       </View>
     );
   }
 
-  
+
   return (
     <NavigationContainer>
-      <Tab.Navigator screenOptions={screenOptions}>
-        <Tab.Screen
-          name="Presifit"
-          component={StepCounterScreen}
-          options={{
-            tabBarIcon: ({ focused }) => {
-              return <Ionicons name={focused ? "home" : "home"}
-                size={focused ? 28 : 24} color={focused ? "black" : "grey"}
-              />
-            }
-          }}
-        />
-
-        <Tab.Screen name="Community"
-          component={Community}
-          options={{
-            tabBarIcon: ({ focused }) => {
-              return <Ionicons name="people-sharp" size={focused ? 28 : 24} color={focused ? "black" : "grey"} />
-            }
-          }} />
-
-        <Tab.Screen name="Leaderboard"
-          component={Leaderboard}
-          options={{
-            tabBarIcon: ({ focused }) => {
-              return <MaterialIcons name="leaderboard" size={focused ? 28 : 24} color={focused ? "black" : "grey"} />
-            }
-          }} />
-
-        <Tab.Screen name="Your Goals"
-          component={Goals}
-          options={{
-            tabBarIcon: ({ focused }) => {
-              return <FontAwesome name="tasks" size={focused ? 28 : 24} color={focused ? "black" : "grey"} />
-            }
-          }} />
-
-        <Tab.Screen name="Events"
-          component={Events}
-          options={{
-            tabBarIcon: ({ focused }) => {
-              return <MaterialIcons name="emoji-events" size={focused ? 28 : 24} color={focused ? "black" : "grey"} />
-            }
-          }} />
-
-        <Tab.Screen name="Settings"
-          component={Settings}
-          options={{
-            tabBarIcon: ({ focused }) => {
-              return <Ionicons name="settings-sharp" size={focused ? 28 : 24} color={focused ? "black" : "grey"} />
-            }
-          }}
-        />
-      </Tab.Navigator>
+      <Drawer.Navigator initialRouteName="Home">
+        <Drawer.Screen name="Presifit" component={TabNavigator} />
+        <Drawer.Screen name="Settings" component={Settings} />
+        <Drawer.Screen name="Consultation" component={Consultation} />
+      </Drawer.Navigator>
     </NavigationContainer>
+  );
+}
+
+const TabNavigator = () => {
+  return (
+    <Tab.Navigator screenOptions={screenOptions}>
+      <Tab.Screen
+        name="Presifit"
+        component={StepCounterScreen}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ focused }) => {
+            return <Ionicons name={"home"}
+              size={focused ? 28 : 24} color={focused ? "black" : "grey"}
+            />
+          }
+        }}
+      />
+
+      <Tab.Screen name="Community"
+        component={Community}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ focused }) => {
+            return <Ionicons name="people-sharp" size={focused ? 28 : 24} color={focused ? "black" : "grey"} />
+          }
+        }} />
+
+      <Tab.Screen name="Leaderboard"
+        component={Leaderboard}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ focused }) => {
+            return <MaterialIcons name="leaderboard" size={focused ? 28 : 24} color={focused ? "black" : "grey"} />
+          }
+        }} />
+
+      <Tab.Screen name="Your Goals"
+        component={Goals}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ focused }) => {
+            return <FontAwesome name="tasks" size={focused ? 28 : 24} color={focused ? "black" : "grey"} />
+          }
+        }} />
+
+      <Tab.Screen name="Events"
+        component={Events}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ focused }) => {
+            return <MaterialIcons name="emoji-events" size={focused ? 28 : 24} color={focused ? "black" : "grey"} />
+          }
+        }} />
+
+      <Tab.Screen name="Rewards"
+        component={Rewards}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ focused }) => {
+            return <MaterialCommunityIcons name = {focused ? "gift-open-outline" : "gift-outline"} size={focused ? 28 : 24} color={focused ? "black" : "grey"} />
+          }
+        }}
+      />
+    </Tab.Navigator>
   );
 }
 
@@ -172,8 +189,8 @@ const StepCounterScreen = () => {
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 30 }}>
-      <Text style={{ fontSize: 32, fontWeight: '400',color:"#0466c8"}}>Hey, {user}</Text>
-      <Text style={{ fontSize: 24, marginTop: 10,color:"#0466c8"}}>Your goal for today is {goal} steps</Text>
+      <Text style={{ fontSize: 32, fontWeight: '600', color: "#0466c8" }}>Hey, {user}</Text>
+      <Text style={{ fontSize: 24, marginTop: 10, color: "#0466c8" }}>Your goal for today is {goal} steps</Text>
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         {/* <View style={styles.datePicker}>
         <AntDesign
@@ -207,11 +224,11 @@ const StepCounterScreen = () => {
           activeStrokeWidth={40}
           title={"Step Count"}
           titleColor={"#0466c8"}
-          titleStyle={{ fontWeight: "400",fontSize:20 }}
+          titleStyle={{ fontWeight: "600", fontSize: 20 }}
         />
         <View style={{ margin: 10, padding: 10 }}>
-          <Text style={{ fontSize: 20, marginTop: 10, borderWidth: 1, borderRadius: 10, padding: 10, }}>Distance covered so far {DistanceCovered} km</Text>
-          <Text style={{ fontSize: 20, marginTop: 10, borderWidth: 1, borderRadius: 10, padding: 10 }}>Calories burned so far {caloriesBurnt} calories</Text>
+          <Text style={{ fontSize: 20, marginTop: 10, borderWidth: 1, borderRadius: 10, padding: 15, }}>Distance covered so far {DistanceCovered} km</Text>
+          <Text style={{ fontSize: 20, marginTop: 10, borderWidth: 1, borderRadius: 10, padding: 15 }}>Calories burned so far {caloriesBurnt} calories</Text>
         </View>
       </View>
 
@@ -231,23 +248,23 @@ const styles = StyleSheet.create({
   logo: {
     // width: 500,
     height: 700,
-    resizeMode:'contain',
-    
+    resizeMode: 'contain',
+
   },
   loadingText: {
-    position:"absolute",
+    position: "absolute",
     // marginTop: 20,
     fontSize: 40,
-    marginTop:70,
+    marginTop: 70,
     fontWeight: 'bold',
-    flex:1,
-    justifyContent:"flex-end"
+    flex: 1,
+    justifyContent: "flex-end"
   },
-  arrow:{
+  arrow: {
     // position:"absolute",
-    marginBottom:50,
-    justifyContent:"flex-start",
-    flex:1,
+    marginBottom: 50,
+    justifyContent: "flex-start",
+    flex: 1,
   }
 });
 

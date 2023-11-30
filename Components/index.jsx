@@ -3,5 +3,6 @@ import Leaderboard from './Leaderboard';
 import Community from './Community';
 import Settings from './Settings';
 import Events from './Events';
-
-export{Goals,Leaderboard,Community,Settings,Events};
+import Rewards from './Rewards';
+import Consultation from './Consultation';
+export{Goals,Leaderboard,Community,Settings,Events,Rewards,Consultation };
