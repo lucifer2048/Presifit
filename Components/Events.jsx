@@ -8,6 +8,13 @@ const generateRandomDate = () => {
   return new Date(randomTime);
 };
 
+const generateNewEventDate = () => {
+  const startDate = new Date(); // Start from today
+  const endDate = new Date(2023, 11, 31); // Replace with your desired end date
+  const randomTime = startDate.getTime() + Math.random() * (endDate.getTime() - startDate.getTime());
+  return new Date(randomTime);
+};
+
 const generateRandomEvents = () => {
   const data = [
     { id: '1', name: 'Walkathons',place:'Bangalore' },
@@ -22,47 +29,40 @@ const generateRandomEvents = () => {
   }));
 };
 
-const Events= ({ navigation }) => {
+const Events = ({ navigation }) => {
   const [events, setEvents] = useState(generateRandomEvents());
   const [input, setInput] = useState('');
 
+  const sortEventsByDate = (eventA, eventB) => {
+    const dateA = new Date(eventA.date);
+    const dateB = new Date(eventB.date);
+    return dateA - dateB;
+  };
+
+  const sortedEvents = events.slice().sort(sortEventsByDate);
+
   const renderItem = ({ item }) => {
+    const isDatePassed = new Date(item.date) < new Date();
+  
     return (
-      <TouchableOpacity style={styles.item}>
-        <Text style={styles.title}>{item.name}</Text>
-        <Text style={styles.title2}>{item.date.toDateString()}</Text>
-        <Text style={styles.title2}>{item.place? item.place:"Bangalore"}</Text>
+      <TouchableOpacity style={[styles.item, isDatePassed && styles.strikeThroughItem]}>
+        <Text style={[styles.title, isDatePassed && styles.strikeThroughText]}>{item.name}</Text>
+        <Text style={[styles.title2, isDatePassed && styles.strikeThroughText]}>{item.date.toDateString()}</Text>
+        <Text style={[styles.title2, isDatePassed && styles.strikeThroughText]}>{item.place ? item.place : 'Bangalore'}</Text>
       </TouchableOpacity>
     );
   };
 
   const handleAddEvent = () => {
     if (input.trim()) {
-      const newEvent = { id: `${events.length + 1}`, name: input.trim(), date: generateRandomDate() };
+      const newEvent = {
+        id: `${events.length + 1}`,
+        name: input.trim(),
+        date: generateNewEventDate(), // Use the new date generator for new events
+      };
       setEvents([...events, newEvent]);
       setInput('');
     }
-  };
-
-  const handleDeleteEvent = (id) => {
-    Alert.alert(
-      'Delete Event',
-      'Are you sure you want to delete this event?',
-      [
-        {
-          text: 'Cancel',
-          onPress: () => {},
-          style: 'cancel',
-        },
-        {
-          text: 'OK',
-          onPress: () => {
-            setEvents(events.filter((item) => item.id !== id));
-          },
-        },
-      ],
-      { cancelable: false }
-    );
   };
 
   return (
@@ -131,6 +131,13 @@ const styles = StyleSheet.create({
   addButtonText: {
     fontSize: 16,
     color: '#fff',
+  },
+  strikeThroughItem: {
+    opacity:0.5, // For example, change the background color when the date has passed
+  },
+  strikeThroughText: {
+    textDecorationLine: 'line-through',
+    opacity: 0.5,
   },
 });
 

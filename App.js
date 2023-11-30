@@ -40,7 +40,7 @@ export default function App() {
     // Simulate an asynchronous operation (e.g., fetching data)
     setTimeout(() => {
       setAppReady(true); // Set app ready state to true after the operation
-    }, 2000); // Simulated delay of 3 seconds
+    }, 1500); // Simulated delay of 3 seconds
   }, []);
 
   if (!isAppReady) {
@@ -208,7 +208,7 @@ const StepCounterScreen = () => {
           activeStrokeWidth={40}
           title={"Step Count"}
           titleColor={"#0466c8"}
-          titleStyle={{ fontWeight: "400" }}
+          titleStyle={{ fontWeight: "400",fontSize:20 }}
         />
         <View style={{ margin: 10, padding: 10 }}>
           <Text style={{ fontSize: 20, marginTop: 10, borderWidth: 1, borderRadius: 10, padding: 10 }}>Distance covered so far {DistanceCovered} km</Text>
