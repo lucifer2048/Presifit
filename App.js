@@ -62,6 +62,8 @@ export default function App() {
         <Drawer.Screen name="Presifit" component={TabNavigator} />
         <Drawer.Screen name="Settings" component={Settings} />
         <Drawer.Screen name="Consultation" component={Consultation} />
+        <Drawer.Screen name="Events" component={Events} />
+        
       </Drawer.Navigator>
     </NavigationContainer>
   );
@@ -110,14 +112,14 @@ const TabNavigator = () => {
           }
         }} />
 
-      <Tab.Screen name="Events"
+      {/* <Tab.Screen name="Events"
         component={Events}
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) => {
             return <MaterialIcons name="emoji-events" size={focused ? 28 : 24} color={focused ? "black" : "grey"} />
           }
-        }} />
+        }} /> */}
 
       <Tab.Screen name="Rewards"
         component={Rewards}
