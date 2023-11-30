@@ -8,11 +8,11 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { Goals, Leaderboard, Community, Settings,Events } from './Components';
-import { SplashScreen } from 'expo';
+
 
 const THRESHOLD = 1.4;
 const STEP_DELAY = 500;
-const WindowHeight = Dimensions.get("window").height;
+
 const Tab = createBottomTabNavigator();
 const user = "Prathyush";
 const goal = 6500;
