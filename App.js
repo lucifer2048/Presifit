@@ -258,11 +258,12 @@ const styles = StyleSheet.create({
     // width: 500,
     height: 700,
     resizeMode: 'contain',
+    marginTop:40,
 
   },
   loadingText: {
     position: "absolute",
-    // marginTop: 20,
+    paddingBottom: 20,
     fontSize: 40,
     marginTop: 70,
     fontWeight: 'bold',
@@ -271,7 +272,7 @@ const styles = StyleSheet.create({
   },
   arrow: {
     // position:"absolute",
-    marginBottom: 50,
+    // marginBottom: 50,
     justifyContent: "flex-start",
     flex: 1,
   },
