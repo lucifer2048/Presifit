@@ -21,6 +21,7 @@ const TaskList = () => {
   const [tasks, setTasks] = useState([
     { id: 1, name: 'Task 1', description: 'Burn 500 calories today', completed: false },
     { id: 2, name: 'Task 2', description: 'No junk foods for a week', completed: false },
+    { id: 3, name: 'Task 3', description: 'Complete 15000 steps this month', completed: false },
     // Add more tasks here
   ]);
 
