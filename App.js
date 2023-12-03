@@ -17,7 +17,7 @@ const STEP_DELAY = 500;
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 const user = "Charlie";
-const goal = 6500;
+const goal = 10_000;
 const screenOptions = {
   tabBarShowLabel: true,
   tabBarHideOnKeyboard: true,
