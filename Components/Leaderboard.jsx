@@ -10,7 +10,7 @@ const Leaderboard = () => {
       { id: 1, name: 'Alice', steps: 7654,avatar: require('../images/alice.jpg') },
       { id: 2, name: 'Bob', steps: 5432,avatar: require('../images/Bob.jpg') },
       { id: 3, name: 'Charlie', steps: 9876,avatar: require('../images/charlie.jpg') },
-      // Add more users as needed
+      
     ];
 
     // Sort the initial data by steps in descending order

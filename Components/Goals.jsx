@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: '#ffffff',
-    marginBottom: 51,
+    marginBottom: 52,
   },
   taskItem: {
     flexDirection: 'col',

@@ -8,7 +8,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
-import { Goals, Leaderboard, Community, Settings, Events, Rewards, Consultation,Company } from './Components';
+import { Goals, Leaderboard, Community, Settings, Events, Rewards, Consultation, Company } from './Components';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
@@ -29,7 +29,7 @@ const screenOptions = {
     right: 2,
     elevation: 0,
     height: 50,
-    backgroundColor: "transparent",
+    backgroundColor: "#eee",
     // backgroundColorOpacity: 0.1,
   }
 }
@@ -127,8 +127,8 @@ const TabNavigator = () => {
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) => {
-            return <MaterialCommunityIcons name = {focused ? "gift-open-outline" : "gift-outline"} size={focused ? 28 : 24} color={focused ? "black" : "grey"} />
-          }
+            return <MaterialCommunityIcons name={focused ? "gift-open-outline" : "gift-outline"} size={focused ? 28 : 24} color={focused ? "black" : "grey"} />
+          },
         }}
       />
     </Tab.Navigator>
@@ -230,15 +230,15 @@ const StepCounterScreen = () => {
           titleStyle={{ fontWeight: "600", fontSize: 20 }}
         />
         <View style={styles.cardContainer}>
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>Distance Covered</Text>
-          <Text style={styles.cardText}>{DistanceCovered} km</Text>
+          <View style={styles.card}>
+            <Text style={styles.cardTitle}>Distance Covered</Text>
+            <Text style={styles.cardText}>{DistanceCovered} km</Text>
+          </View>
+          <View style={styles.card}>
+            <Text style={styles.cardTitle}>Calories Burned</Text>
+            <Text style={styles.cardText}>{caloriesBurnt} calories</Text>
+          </View>
         </View>
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>Calories Burned</Text>
-          <Text style={styles.cardText}>{caloriesBurnt} calories</Text>
-        </View>
-      </View>
       </View>
 
       {/* <Button title="Set Start Date" onPress={() => setStartDate(new Date())} />
@@ -293,7 +293,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    margin:5
+    margin: 5
   },
   cardTitle: {
     fontSize: 18,
