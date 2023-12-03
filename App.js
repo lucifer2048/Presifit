@@ -16,7 +16,7 @@ const THRESHOLD = 1.4;
 const STEP_DELAY = 500;
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
-const user = "Prathyush";
+const user = "Charlie";
 const goal = 6500;
 const screenOptions = {
   tabBarShowLabel: true,
