@@ -20,11 +20,11 @@ const Community = () => {
   );
 
   const inviteViaWhatsApp = () => {
-    Linking.openURL('whatsapp://send?text=Join me in this amazing app! https://yourapp.com');
+    Linking.openURL('whatsapp://send?text=Join me in this amazing app! https://Presifit.com');
   };
 
   const inviteViaFacebook = () => {
-    Linking.openURL('https://www.facebook.com/sharer/sharer.php?u=https://yourapp.com');
+    Linking.openURL('https://www.facebook.com/sharer/sharer.php?u=https://Presifit.com');
   };
 
   return (
@@ -33,7 +33,7 @@ const Community = () => {
         <TextInput
           style={styles.searchInput}
           placeholder="Search"
-        // Add search functionality
+        // to Add search functionality
         />
         <TouchableOpacity onPress={() => { }} style={styles.searchButton}>
           <AntDesign name="search1" size={24} color="white" />
@@ -54,7 +54,7 @@ const Community = () => {
           <FontAwesome name="facebook" size={24} color="white" />
           <Text style={styles.inviteText}>Invite via Facebook</Text>
         </TouchableOpacity>
-      </View >
+      </View>
     </SafeAreaView>
   );
 };
@@ -69,8 +69,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     margin: 20,
-
-    // marginTop:50
   },
   searchInput: {
     flex: 1,
@@ -79,7 +77,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     paddingHorizontal: 10,
-
   },
   searchButton: {
     backgroundColor: '#3498db',
@@ -121,7 +118,6 @@ const styles = StyleSheet.create({
   username: {
     fontSize: 16,
     fontWeight: '400',
-
   },
   inviteContainer: {
     flexDirection: 'col',

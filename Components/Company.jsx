@@ -7,13 +7,16 @@ const Company = () => {
       {/* <Text style={styles.heading}>About Us</Text> */}
       <View style={styles.content}>
         <Text style={styles.paragraph}>
-          Welcome to our health app! We are dedicated to helping you achieve your fitness goals and lead a healthier lifestyle.
+          Welcome to our health app! We are dedicated to helping you achieve your fitness goals
+          and lead a healthier lifestyle.
         </Text>
         <Text style={styles.paragraph}>
-          Our mission is to provide you with the tools and resources necessary to make informed decisions about your health and well-being.
+          Our mission is to provide you with the tools and resources necessary to make informed
+          decisions about your health and well-being.
         </Text>
         <Text style={styles.paragraph}>
-          This app was created by a team of passionate developers and health enthusiasts who believe in the power of technology to transform lives.
+          This app was created by a team of passionate developers and health enthusiasts who
+          believe in the power of technology to transform lives.
         </Text>
         <Text style={styles.teamHeading}>Our Team</Text>
         <View style={styles.teamMember}>
@@ -36,7 +39,6 @@ const Company = () => {
           <Text style={styles.memberName}>Sushruth S</Text>
           <Text style={styles.memberRole}>UX/UI Designer</Text>
         </View>
-        
       </View>
     </ScrollView>
   );
@@ -46,8 +48,8 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     padding: 20,
-    backgroundColor:"#48cae4",
-    
+    backgroundColor: "#48cae4",
+
   },
   heading: {
     fontSize: 24,
@@ -66,7 +68,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10,
-    
+
   },
   teamMember: {
     marginBottom: 10,

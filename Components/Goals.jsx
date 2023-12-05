@@ -6,7 +6,6 @@ const TaskItem = ({ task, onTaskCompleted }) => {
     <TouchableOpacity onPress={() => onTaskCompleted(task.id)}>
       <View style={[styles.taskItem, task.completed && styles.completedTask]}>
         <Text style={[styles.Textstyle, task.completed && styles.completedText]}>{task.description}</Text>
-        {/* For simplicity, a button is used to mark completion */}
         {!task.completed && (
           <TouchableOpacity onPress={() => onTaskCompleted(task.id)}>
             <Text>Not Completed yet</Text>
@@ -22,7 +21,7 @@ const TaskList = () => {
     { id: 1, name: 'Task 1', description: 'Burn 500 calories today', completed: false },
     { id: 2, name: 'Task 2', description: 'No junk foods for a week', completed: false },
     { id: 3, name: 'Task 3', description: 'Complete 15000 steps this month', completed: false },
-    // Add more tasks here
+
   ]);
 
   const [inputTask, setInputTask] = useState('');
@@ -84,8 +83,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent:"center",
     padding: 10,
-    // borderWidth: 1,
-    // borderColor: '#cccccc',
     margin: 10,
     height: 100,
     borderRadius: 15,

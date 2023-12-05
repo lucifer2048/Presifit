@@ -30,7 +30,6 @@ const screenOptions = {
     elevation: 0,
     height: 50,
     backgroundColor: "#eee",
-    // backgroundColorOpacity: 0.1,
   }
 }
 
@@ -38,10 +37,9 @@ export default function App() {
   const [isAppReady, setAppReady] = useState(false);
 
   useEffect(() => {
-    // Simulate an asynchronous operation (e.g., fetching data)
     setTimeout(() => {
-      setAppReady(true); // Set app ready state to true after the operation
-    }, 1500); // Simulated delay of 3 seconds
+      setAppReady(true);
+    }, 1500);
   }, []);
 
   if (!isAppReady) {
@@ -112,17 +110,8 @@ const TabNavigator = () => {
             return <FontAwesome5 name="tasks" size={focused ? 28 : 24} color={focused ? "black" : "grey"} />
           }
         }} />
-
-      {/* <Tab.Screen name="Events"
-        component={Events}
-        options={{
-          headerShown: false,
-          tabBarIcon: ({ focused }) => {
-            return <MaterialIcons name="emoji-events" size={focused ? 28 : 24} color={focused ? "black" : "grey"} />
-          }
-        }} /> */}
-
-      <Tab.Screen name="Rewards"
+        
+        <Tab.Screen name="Rewards"
         component={Rewards}
         options={{
           headerShown: false,

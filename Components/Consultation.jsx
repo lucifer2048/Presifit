@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput, StyleSheet, ScrollView } from 'react-native';
+import { Text, TouchableOpacity, TextInput, StyleSheet, ScrollView } from 'react-native';
 
 const Consultation = () => {
   const [selectedProfessional, setSelectedProfessional] = useState(null);
@@ -29,7 +29,7 @@ const Consultation = () => {
 
   const handleBooking = () => {
     if (selectedProfessional) {
-      // Implement logic to handle the booking, e.g., store the appointment details
+      //logic to handle the booking
       alert(`Appointment booked with ${selectedProfessional.type} for ${customerName}`);
       alert(`Contact ${selectedProfessional.type} at ${selectedProfessional.contactNumber}`);
     } else {

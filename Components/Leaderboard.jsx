@@ -5,7 +5,6 @@ const Leaderboard = () => {
   const [leaderboardData, setLeaderboardData] = useState([]);
 
   useEffect(() => {
-    // Simulated data for multiple users with steps
     const initialData = [
       { id: 1, name: 'Alice', steps: 7654,avatar: require('../images/alice.jpg') },
       { id: 2, name: 'Bob', steps: 5432,avatar: require('../images/Bob.jpg') },
@@ -13,10 +12,9 @@ const Leaderboard = () => {
       
     ];
 
-    // Sort the initial data by steps in descending order
+    
     const sortedData = initialData.sort((a, b) => b.steps - a.steps);
 
-    // Update the ranks dynamically based on the sorted order
     const rankedData = sortedData.map((user, index) => ({
       ...user,
       rank: index + 1,

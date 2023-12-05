@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity, Alert, TextInput } from 'react-native';
 
 const generateRandomDate = () => {
-  const startDate = new Date(2023, 10, 1); // Replace with your desired start date
-  const endDate = new Date(2023, 11, 31); // Replace with your desired end date
+  const startDate = new Date(2023, 10, 1);
+  const endDate = new Date(2023, 11, 31);
   const randomTime = startDate.getTime() + Math.random() * (endDate.getTime() - startDate.getTime());
   return new Date(randomTime);
 };
 
 const generateNewEventDate = () => {
-  const startDate = new Date(); // Start from today
-  const endDate = new Date(2023, 11, 31); // Replace with your desired end date
+  const startDate = new Date();
+  const endDate = new Date(2023, 11, 31);
   const randomTime = startDate.getTime() + Math.random() * (endDate.getTime() - startDate.getTime());
   return new Date(randomTime);
 };
@@ -58,7 +58,7 @@ const Events = ({ navigation }) => {
       const newEvent = {
         id: `${events.length + 1}`,
         name: input.trim(),
-        date: generateNewEventDate(), // Use the new date generator for new events
+        date: generateNewEventDate(),
       };
       setEvents([...events, newEvent]);
       setInput('');
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   strikeThroughItem: {
-    opacity:0.5, // For example, change the background color when the date has passed
+    opacity:0.5,
   },
   strikeThroughText: {
     textDecorationLine: 'line-through',
