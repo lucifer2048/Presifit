@@ -12,7 +12,7 @@ import { Goals, Leaderboard, Community, Settings, Events, Rewards, Consultation,
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-const THRESHOLD = 1.4;
+const THRESHOLD = 1.5;
 const STEP_DELAY = 500;
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();

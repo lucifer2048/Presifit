@@ -39,7 +39,7 @@ const Events = ({ navigation }) => {
     return dateA - dateB;
   };
 
-  const sortedEvents = events.slice().sort(sortEventsByDate);
+  // const sortedEvents = events.slice().sort(sortEventsByDate);
 
   const renderItem = ({ item }) => {
     const isDatePassed = new Date(item.date) < new Date();
