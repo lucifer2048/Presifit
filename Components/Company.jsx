@@ -21,14 +21,6 @@ const Company = () => {
           <Text style={styles.memberRole}>Lead Developer</Text>
         </View>
         <View style={styles.teamMember}>
-          <Text style={styles.memberName}>Syed Afreen Akther</Text>
-          <Text style={styles.memberRole}>UX/UI Designer</Text>
-        </View>
-        <View style={styles.teamMember}>
-          <Text style={styles.memberName}>Sushruth S</Text>
-          <Text style={styles.memberRole}>UX/UI Designer</Text>
-        </View>
-        <View style={styles.teamMember}>
           <Text style={styles.memberName}>Akash R</Text>
           <Text style={styles.memberRole}>Developer</Text>
         </View>
@@ -36,6 +28,15 @@ const Company = () => {
           <Text style={styles.memberName}>Akash V</Text>
           <Text style={styles.memberRole}>Developer</Text>
         </View>
+        <View style={styles.teamMember}>
+          <Text style={styles.memberName}>Syed Afreen Akther</Text>
+          <Text style={styles.memberRole}>UX/UI Designer</Text>
+        </View>
+        <View style={styles.teamMember}>
+          <Text style={styles.memberName}>Sushruth S</Text>
+          <Text style={styles.memberRole}>UX/UI Designer</Text>
+        </View>
+        
       </View>
     </ScrollView>
   );
