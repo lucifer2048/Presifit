@@ -78,6 +78,22 @@ const Rewards = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+    <View style={styles.rewardContainer}>
+        <Text style={styles.subHeading}>Your Points: {userPoints}</Text>
+        <Text style={styles.subHeading2}>Available Coupons:</Text>
+        <FlatList
+          data={coupons}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <TouchableOpacity onPress={() => purchaseCoupon(item)}>
+              <View style={styles.rewardItem}>
+                <Text>{`${item.name} - ${item.points} Points`}</Text>
+                <Text style={styles.rewardText}>Click to Purchase</Text>
+              </View>
+            </TouchableOpacity>
+          )}
+        />
+      </View>
       <View style={styles.rewardContainer}>
         <Text style={styles.subHeading2}>Leaderboard Rewards:</Text>
         <FlatList
@@ -102,22 +118,7 @@ const Rewards = () => {
           )}
         />
       </View>
-      <View style={styles.rewardContainer}>
-        <Text style={styles.subHeading}>Your Points: {userPoints}</Text>
-        <Text style={styles.subHeading2}>Available Coupons:</Text>
-        <FlatList
-          data={coupons}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => purchaseCoupon(item)}>
-              <View style={styles.rewardItem}>
-                <Text>{`${item.name} - ${item.points} Points`}</Text>
-                <Text style={styles.rewardText}>Click to Purchase</Text>
-              </View>
-            </TouchableOpacity>
-          )}
-        />
-      </View>
+      
     </ScrollView>
   );
 };
@@ -140,8 +141,8 @@ const styles = StyleSheet.create({
   },
   subHeading: {
     fontSize: 25,
-    fontWeight: '400',
-    marginTop:20,
+    fontWeight: 'bold',
+    marginTop:5,
     marginBottom: 30,
   },
   subHeading2: {

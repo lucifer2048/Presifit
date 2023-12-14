@@ -29,7 +29,7 @@ const screenOptions = {
     right: 2,
     elevation: 0,
     height: 50,
-    backgroundColor: "#eee",
+    backgroundColor: "#fff",
   }
 }
 
