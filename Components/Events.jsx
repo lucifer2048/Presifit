@@ -1,84 +1,169 @@
 import React, { useState } from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity, Alert, TextInput } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Modal,
+  Pressable,
+} from 'react-native';
 
-const generateRandomDate = () => {
-  const startDate = new Date(2023, 10, 1);
-  const endDate = new Date(2023, 11, 31);
-  const randomTime = startDate.getTime() + Math.random() * (endDate.getTime() - startDate.getTime());
-  return new Date(randomTime);
-};
-
-const generateNewEventDate = () => {
-  const startDate = new Date();
-  const endDate = new Date(2023, 11, 31);
-  const randomTime = startDate.getTime() + Math.random() * (endDate.getTime() - startDate.getTime());
-  return new Date(randomTime);
-};
-
-const generateRandomEvents = () => {
-  const data = [
-    { id: '1', name: 'Walkathons',place:'Bangalore' },
-    { id: '2', name: 'Cyclethons',place:'Bangalore' },
-    { id: '3', name: 'Biking',place:'Bangalore' },
-    { id: '4', name: 'Brisk Walking',place:'Bangalore' },
-  ];
-
-  return data.map((event) => ({
-    ...event,
-    date: generateRandomDate(),
-  }));
-};
-
-const Events = ({ navigation }) => {
-  const [events, setEvents] = useState(generateRandomEvents());
-  const [input, setInput] = useState('');
-
-  const sortEventsByDate = (eventA, eventB) => {
-    const dateA = new Date(eventA.date);
-    const dateB = new Date(eventB.date);
-    return dateA - dateB;
-  };
-
-  // const sortedEvents = events.slice().sort(sortEventsByDate);
-
-  const renderItem = ({ item }) => {
-    const isDatePassed = new Date(item.date) < new Date();
-  
-    return (
-      <TouchableOpacity style={[styles.item, isDatePassed && styles.strikeThroughItem]}>
-        <Text style={[styles.title, isDatePassed && styles.strikeThroughText]}>{item.name}</Text>
-        <Text style={[styles.title2, isDatePassed && styles.strikeThroughText]}>{item.date.toDateString()}</Text>
-        <Text style={[styles.title2, isDatePassed && styles.strikeThroughText]}>{item.place ? item.place : 'Bangalore'}</Text>
-      </TouchableOpacity>
-    );
-  };
+const Events = () => {
+  const [eventText, setEventText] = useState('');
+  const [eventTime, setEventTime] = useState('');
+  const [eventLocation, setEventLocation] = useState('');
+  const [eventDate, setEventDate] = useState('');
+  const [eventDescription, setEventDescription] = useState('');
+  const [events, setEvents] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [addEventModalVisible, setAddEventModalVisible] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
   const handleAddEvent = () => {
-    if (input.trim()) {
+    if (
+      eventText.trim() !== '' &&
+      eventTime.trim() !== '' &&
+      eventLocation.trim() !== '' &&
+      eventDate.trim() !== ''
+    ) {
       const newEvent = {
-        id: `${events.length + 1}`,
-        name: input.trim(),
-        date: generateNewEventDate(),
+        id: Math.random().toString(),
+        text: eventText,
+        date: eventDate,
+        time: eventTime,
+        place: eventLocation,
+        description: eventDescription,
+        isAttending: false,
       };
+
       setEvents([...events, newEvent]);
-      setInput('');
+      setEventText('');
+      setEventTime('');
+      setEventLocation('');
+      setEventDate('');
+      setEventDescription('');
+      setAddEventModalVisible(false);
     }
+  };
+
+  const handleEventPress = (event) => {
+    setSelectedEvent(event);
+    setModalVisible(true);
+  };
+
+  const handleEventLongPress = () => {
+    // Optional: You can add an alert or any other action for long press on an event
   };
 
   return (
     <View style={styles.container}>
-      <FlatList data={events} renderItem={renderItem} keyExtractor={(item) => item.id} />
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter a new event"
-          value={input}
-          onChangeText={setInput}
-        />
-        <TouchableOpacity style={styles.addButton} onPress={handleAddEvent}>
-          <Text style={styles.addButtonText}>Add Event</Text>
-        </TouchableOpacity>
+      {/* <Text style={styles.title}>Event Page</Text> */}
+
+      {/* Events List */}
+      <View style={styles.eventsList}>
+        {events.map((event) => (
+          <TouchableOpacity
+            key={event.id}
+            onPress={() => handleEventPress(event)}
+            onLongPress={handleEventLongPress}
+            style={[
+              styles.eventItem,
+              event.isAttending && styles.attendingEventItem,
+            ]}>
+            <Text
+              style={[
+                styles.eventText,
+                event.isAttending && styles.attendingText,
+                event.isAttending && styles.crossedOutText,
+              ]}>
+              {event.text}
+            </Text>
+            <Text style={styles.eventDetailText}>{event.time}</Text>
+            <Text style={styles.eventDetailText}>{event.date}</Text>
+            <Text style={styles.eventDetailText}>{event.place}</Text>
+          </TouchableOpacity>
+        ))}
       </View>
+
+      {/* Event Details Modal */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Event Details</Text>
+            <Text style={styles.modalDetailText}>{selectedEvent?.text}</Text>
+            <Text style={styles.modalDetailText}>{selectedEvent?.time}</Text>
+            <Text style={styles.modalDetailText}>{selectedEvent?.date}</Text>
+            <Text style={styles.modalDetailText}>{selectedEvent?.place}</Text>
+            <Text style={styles.modalDetailText}>
+              {selectedEvent?.description}
+            </Text>
+            <Pressable onPress={() => setModalVisible(false)}>
+              <Text style={styles.closeModalText}>Close</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+
+      {/* Add Event Button */}
+      <TouchableOpacity
+        style={styles.addButton}
+        onPress={() => setAddEventModalVisible(true)}>
+        <Text style={styles.buttonText}>Add Event</Text>
+      </TouchableOpacity>
+
+      {/* Add Event Modal */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={addEventModalVisible}
+        onRequestClose={() => setAddEventModalVisible(false)}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Add Event</Text>
+            <TextInput
+              style={styles.modalInput}
+              placeholder="Event Name"
+              value={eventText}
+              onChangeText={(text) => setEventText(text)}
+            />
+            <TextInput
+              style={styles.modalInput}
+              placeholder="Event Time"
+              value={eventTime}
+              onChangeText={(text) => setEventTime(text)}
+            />
+            <TextInput
+              style={styles.modalInput}
+              placeholder="Event Location"
+              value={eventLocation}
+              onChangeText={(text) => setEventLocation(text)}
+            />
+            <TextInput
+              style={styles.modalInput}
+              placeholder="Event Date (DD-MM-YYYY)"
+              value={eventDate}
+              onChangeText={(text) => setEventDate(text)}
+            />
+            <TextInput
+              style={styles.modalInput}
+              placeholder="Event Description"
+              value={eventDescription}
+              onChangeText={(text) => setEventDescription(text)}
+            />
+            <TouchableOpacity style={styles.modalButton} onPress={handleAddEvent}>
+              <Text style={styles.buttonText}>Add Event</Text>
+            </TouchableOpacity>
+            <Pressable onPress={() => setAddEventModalVisible(false)}>
+              <Text style={styles.closeModalText}>Close</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -86,60 +171,106 @@ const Events = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 22,
-    backgroundColor: '#48cae4',
-    // marginBottom:51
+    padding: 20,
   },
-  item: {
-    // padding: 10,
-    height: 120,
-    backgroundColor: '#fff',
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  eventsList: {
+    marginTop: 10,backgroundColor: '#fff',
     marginVertical: 8,
     marginHorizontal: 20,
     borderRadius: 24,
-    flex:0.5,
-    alignItems:"center",
-    justifyContent:"center",
     elevation:10
   },
-  title: {
-    fontSize: 30,
-    padding:5,
+  eventItem: {
+    padding: 15,
   },
-  title2: {
-    fontSize: 14,
-    padding:5,
+  attendingEventItem: {
+    backgroundColor: '#3d405b',
   },
-  inputContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 10,
-    marginBottom:20
+  eventText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 5,
+    color: 'black',
+    textAlign: 'center',
   },
-  input: {
-    flex: 1,
-    padding: 12,
-    borderWidth: 1,
-    borderColor: '#3d405b',
-    borderRadius: 24,
-    marginRight:5
+  attendingText: {
+    color: 'white',
+  },
+  eventDetailText: {
+    fontSize: 16,
+    textAlign: 'center',
+    marginBottom: 2,
+    // padding:20
+  },
+  crossedOutText: {
+    textDecorationLine: 'line-through',
+    color: 'gray',
   },
   addButton: {
+    position: 'absolute',
+    bottom: 20,
+    left: 20,
+    right: 20,
     backgroundColor: '#3d405b',
-    padding: 12,
+    padding: 15,
     borderRadius: 24,
   },
-  addButtonText: {
+  buttonText: {
+    color: 'white',
     fontSize: 16,
-    color: '#fff',
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
-  strikeThroughItem: {
-    opacity:0.5,
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  strikeThroughText: {
-    textDecorationLine: 'line-through',
-    opacity: 0.5,
+  modalContent: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 24,
+    elevation: 5,
+  },
+  modalTitle: {
+    fontSize: 32,
+    fontWeight: '400',
+    marginBottom: 10,
+    padding:20,
+    paddingTop:0,
+  },
+  modalDetailText: {
+    fontSize: 24,
+    textAlign: 'center',
+    marginBottom: 2,
+    paddingLeft:30,
+    paddingRight:30,
+  },
+  modalInput: {
+    height: 50,
+    width:250,
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 8,
+    margin: 10,
+    padding: 10,
+  },
+  modalButton: {
+    backgroundColor: '#3d405b',
+    padding: 15,
+    borderRadius: 24,
+    margin:10
+  },
+  closeModalText: {
+    color: 'purple',
+    textAlign: 'center',
+    marginTop: 10,
+    fontSize:20
   },
 });
 

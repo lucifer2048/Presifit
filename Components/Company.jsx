@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     padding: 20,
-    backgroundColor: "#48cae4",
+    backgroundColor: "#caf0f8",
 
   },
   heading: {
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   },
   memberRole: {
     fontSize: 16,
-    color: '#caf0f8',
+    color: 'blue',
   },
 });
 
