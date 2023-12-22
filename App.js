@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Accelerometer } from 'expo-sensors';
-import { View, Text, Dimensions, StyleSheet, Image } from 'react-native';
+import { View, Text,StyleSheet, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import CircularProgress from "react-native-circular-progress-indicator";
 import { MaterialIcons } from '@expo/vector-icons';
-import { Ionicons, AntDesign } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Goals, Leaderboard, Community, Settings, Events, Rewards, Consultation, Company } from './Components';
@@ -184,25 +184,6 @@ const StepCounterScreen = () => {
       <Text style={{ fontSize: 32, fontWeight: '600', color: "#0466c8" }}>Hey, {user}</Text>
       <Text style={{ fontSize: 24, marginTop: 10, color: "#0466c8" }}>Your goal for today is {goal} steps</Text>
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        {/* <View style={styles.datePicker}>
-        <AntDesign
-          onPress={() => changeDate(-1)}
-          name="left"
-          size={20}
-          color="#000"
-        />
-        <Text style={styles.date}>{date.toDateString()}</Text>
-        
-
-        <AntDesign
-          onPress={() => changeDate(1)}
-          name="right"
-          size={20}
-          color="#000"
-        />
-        
-      </View> */}
-        {/* <Text style={{ fontSize: 20, marginTop: 20 }}>Steps between dates: {stepsBetweenDates}</Text> */}
         <CircularProgress
           value={stepCount}
           maxValue={goal}
@@ -229,9 +210,6 @@ const StepCounterScreen = () => {
           </View>
         </View>
       </View>
-
-      {/* <Button title="Set Start Date" onPress={() => setStartDate(new Date())} />
-      <Button title="Set End Date" onPress={() => setEndDate(new Date())} /> */}
     </View>
   );
 };
@@ -241,7 +219,7 @@ const styles = StyleSheet.create({
     flex: 1,
     // justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff', // Adjust as per your design
+    backgroundColor: '#fff',
   },
   logo: {
     // width: 500,
