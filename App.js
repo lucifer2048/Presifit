@@ -17,7 +17,7 @@ const STEP_DELAY = 500;
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 const user = "Charlie";
-const goal = 10_000;
+const goal = 1000;
 const screenOptions = {
   tabBarShowLabel: true,
   tabBarHideOnKeyboard: true,
@@ -39,7 +39,7 @@ export default function App() {
   useEffect(() => {
     setTimeout(() => {
       setAppReady(true);
-    }, 1500);
+    }, 1000);
   }, []);
 
   if (!isAppReady) {
