@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, TouchableOpacity, StyleSheet, SafeAreaView, } from 'react-native';
 import { List, Divider } from 'react-native-paper';
-
+// import ProfileScreen from "../screens/ProfileScreen"
 const SettingsSection = ({ title, options }) => {
   return (
     <View style={styles.section}>
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     elevation: 5,
     height: 200,
-    elevation:10
+    elevation: 10
   },
   sectionTitle: {
     fontSize: 24,
