@@ -10,6 +10,14 @@ const stepsSchema = new mongoose.Schema({
         type: Number,
         default: 0,
     },
+    Distance:{
+        type:Number,
+        default:0,
+    },
+    Calories:{
+        type:Number,
+        default:0,
+    },
     createdAt: {
         type: Date,
         default: Date.now,
