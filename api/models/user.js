@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -19,31 +19,23 @@ const userSchema = new mongoose.Schema({
         default: false,
     },
     verificationToken: String,
-    addresses: [
+    steps: {
+        type: Number,
+        default: 0,
+    },
+    Distance: {
+        type: Number,
+        default: 0,
+    },
+    Calories: {
+        type: Number,
+        default: 0,
+    },
+    gender: [
         {
-            name: String,
-            mobileNo: String,
-            houseNo: String,
-            street: String,
-            landmark: String,
-            city: String,
-            country: String,
-            postalCode: String,
-        },
-    ],
-
-    steps: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "steps",
+            type: String,
+            required: true,
         }
-    ],
-    gender:[
-        {
-            type:String,
-            required:true,
-        }
-        
     ],
     createdAt: {
         type: Date,
@@ -53,4 +45,4 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", userSchema);
 
-module.exports = User
+module.exports = User;
