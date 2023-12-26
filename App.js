@@ -1,20 +1,16 @@
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
-import { ModalPortal } from "react-native-modals";
-import { Provider } from "react-redux";
+import React from 'react'
 import StackNavigator from "./navigation/StackNavigator";
-// import store from "./store";
-import { UserContext } from "./UserContext";
+import { UserProvider } from "./UserContext";
 
 export default function App() {
   return (
     <>
-      {/* <Provider store={}> */}
-        <UserContext>
-          <StackNavigator />
-          <ModalPortal />
-        </UserContext>
-      {/* </Provider> */}
+
+      <UserProvider>
+        <StackNavigator />
+        {/* <ModalPortal /> */}
+      </UserProvider>
     </>
   );
 }

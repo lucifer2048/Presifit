@@ -4,7 +4,6 @@ import {
     View,
     SafeAreaView,
     Pressable,
-    Image,
     KeyboardAvoidingView,
     TextInput,
     Alert,
