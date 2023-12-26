@@ -131,17 +131,6 @@ const TabNavigator = () => {
 
 const StepCounterScreen = () => {
   const [stepCount, setStepCount] = useState(0);
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
-  const [date, setDate] = useState(new Date());
-  const changeDate = (numDays) => {
-    const currentDate = new Date(date); // Create a copy of the current date
-    // Update the date by adding/subtracting the number of days
-    currentDate.setDate(currentDate.getDate() + numDays);
-
-    setDate(currentDate); // Update the state variable
-  };
-  const [stepsBetweenDates, setStepsBetweenDates] = useState(0);
   const Dist = stepCount / 1300;
   const DistanceCovered = Dist.toFixed(2);
   const cal = DistanceCovered * 60;
@@ -174,15 +163,6 @@ const StepCounterScreen = () => {
       Accelerometer.removeAllListeners();
     };
   }, []);
-
-  useEffect(() => {
-    const steps = calculateStepsBetweenDates(startDate, endDate);
-    setStepsBetweenDates(steps);
-  }, [startDate, endDate]);
-
-  const calculateStepsBetweenDates = (start, end) => {
-    return Math.floor(Math.random() * 1000);
-  };
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 30 }}>
