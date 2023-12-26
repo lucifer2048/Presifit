@@ -23,14 +23,6 @@ const userSchema = new mongoose.Schema({
         type: Number,
         default: 0,
     },
-    Distance: {
-        type: Number,
-        default: 0,
-    },
-    Calories: {
-        type: Number,
-        default: 0,
-    },
     gender: [
         {
             type: String,

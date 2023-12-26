@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Accelerometer } from 'expo-sensors';
-import { View, Text,StyleSheet, Image} from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import CircularProgress from "react-native-circular-progress-indicator";
@@ -16,6 +16,7 @@ import Logout from './Logout';
 
 const THRESHOLD = 1.5;
 const STEP_DELAY = 500;
+
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 const user = "Charlie";
@@ -32,7 +33,7 @@ const screenOptions = {
     elevation: 0,
     height: 50,
     backgroundColor: "#fff",
-    
+
   }
 }
 
@@ -115,8 +116,8 @@ const TabNavigator = () => {
             return <FontAwesome5 name="tasks" size={focused ? 28 : 24} color={focused ? "black" : "grey"} />
           }
         }} />
-        
-        <Tab.Screen name="Rewards"
+
+      <Tab.Screen name="Rewards"
         component={Rewards}
         options={{
           headerShown: false,
@@ -135,14 +136,71 @@ const StepCounterScreen = () => {
   const DistanceCovered = Dist.toFixed(2);
   const cal = DistanceCovered * 60;
   const caloriesBurnt = cal.toFixed(2);
+  const userIdno = '65894af9bf356e01f52bf77a'
+
+  const sendStepDataToBackend = async (steps, userId) => {
+    try {
+      const response = await fetch(`http://192.168.213.74:8000/steps/${userIdno}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId,
+          steps,
+        }),
+      });
+
+      const data = await response.json();
+      console.log('Step count data sent to backend:', data);
+    } catch (error) {
+      console.error('Error sending step count data to backend:', error);
+    }
+  };
+
+  useEffect(() => {
+    sendStepDataToBackend(stepCount, userIdno); // Pass userIdno to the function
+  }, [stepCount]);
+
+  const fetchStepDataFromBackend = async (userIdno) => {
+    try {
+      const response = await fetch(`http://192.168.213.74:8000/steps/${userIdno}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error('Error fetching step count data from backend');
+      }
+  
+      const data = await response.json();
+      console.log('Step count data fetched from backend:', data);
+      return data.steps; // Assuming the steps data is structured as an object with a 'steps' property
+    } catch (error) {
+      console.error('Error fetching step count data from backend:', error);
+      return 0; // Return default value or handle the error accordingly
+    }
+  };
+
+  const fetchSteps = async (userId) => {
+    const steps = await fetchStepDataFromBackend(userId);
+    setStepCount(steps);
+  };
+
+  useEffect(() => {
+    fetchSteps(userIdno);
+  }, []);
+
 
   useEffect(() => {
     let lastStepTime = new Date().getTime();
 
     const handleSensorData = (data) => {
       const { x, y, z } = data;
-
       const acceleration = Math.sqrt(x * x + y * y + z * z);
+
       if (acceleration > THRESHOLD) {
         const currentTime = new Date().getTime();
         if (currentTime - lastStepTime > STEP_DELAY) {
@@ -167,7 +225,7 @@ const StepCounterScreen = () => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 30 }}>
       <Text style={{ fontSize: 32, fontWeight: '600', color: "#0466c8" }}>Hey, {user}</Text>
-      <Text style={{ fontSize: 24, marginTop: 30,marginLeft:"auto",marginRight:"auto", color: "#0466c8" }}>“Once you learn to quit, it becomes a habit.” – Vince Lombardi</Text>
+      <Text style={{ fontSize: 24, marginTop: 30, marginLeft: "auto", marginRight: "auto", color: "#0466c8" }}>“Once you learn to quit, it becomes a habit.” – Vince Lombardi</Text>
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <CircularProgress
           value={stepCount}
@@ -210,7 +268,7 @@ const styles = StyleSheet.create({
     // width: 500,
     height: 700,
     resizeMode: 'contain',
-    marginTop:40,
+    marginTop: 40,
 
   },
   loadingText: {
