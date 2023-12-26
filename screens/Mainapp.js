@@ -12,6 +12,7 @@ import { Goals, Leaderboard, Community, Settings, Events, Rewards, Consultation,
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Logout from './Logout';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const THRESHOLD = 1.5;
@@ -132,6 +133,7 @@ const TabNavigator = () => {
 
 const StepCounterScreen = () => {
   const [stepCount, setStepCount] = useState(0);
+  const [loaded, setLoaded] = useState(false);
   const Dist = stepCount / 1300;
   const DistanceCovered = Dist.toFixed(2);
   const cal = DistanceCovered * 60;
@@ -194,6 +196,30 @@ const StepCounterScreen = () => {
   }, []);
 
 
+  const saveStepCount = async (steps) => {
+    try {
+      await AsyncStorage.setItem('stepCount', JSON.stringify(steps));
+    } catch (error) {
+      console.error('Error saving step count:', error);
+    }
+  };
+
+  const loadStepCount = async () => {
+    try {
+      const storedSteps = await AsyncStorage.getItem('stepCount');
+      if (storedSteps !== null) {
+        setStepCount(JSON.parse(storedSteps));
+      }
+      setLoaded(true);
+    } catch (error) {
+      console.error('Error loading step count:', error);
+    }
+  };
+
+  useEffect(() => {
+    loadStepCount();
+  }, []);
+
   useEffect(() => {
     let lastStepTime = new Date().getTime();
 
@@ -221,6 +247,15 @@ const StepCounterScreen = () => {
       Accelerometer.removeAllListeners();
     };
   }, []);
+
+  useEffect(() => {
+    // Check if step count has been loaded from AsyncStorage before updating backend
+    if (loaded) {
+      sendStepDataToBackend(stepCount, userIdno); // Send updated step count to the backend
+      saveStepCount(stepCount); // Save step count in AsyncStorage
+    }
+  }, [stepCount, loaded]);
+
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 30 }}>
