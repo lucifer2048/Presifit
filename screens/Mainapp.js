@@ -20,7 +20,7 @@ const STEP_DELAY = 500;
 
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
-const user = "Charlie";
+const user = "healtier YOU";
 const goal = 1000;
 const screenOptions = {
   tabBarShowLabel: true,
