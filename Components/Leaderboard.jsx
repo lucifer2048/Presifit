@@ -51,9 +51,9 @@ const Leaderboard = () => {
 
       // Update leaderboardData with the latest username and stepCount
       const updatedData = [
-        { id: 1, name: username, steps: stepCount, avatar: require('../images/alice.jpg') },
-        { id: 2, name: 'Bob', steps: 5555, avatar: require('../images/Bob.jpg') },
-        { id: 3, name: 'Charlie', steps: 9876, avatar: require('../images/charlie.jpg') },
+        { id: 1, name: 'Alice', steps: 35, avatar: require('../images/alice.jpg') },
+        { id: 2, name: 'Bob', steps: 555, avatar: require('../images/charlie.jpg') },
+        { id: 3, name: username, steps: stepCount, avatar: require('../images/Bob.jpg') },
       ];
 
       const sortedData = updatedData.sort((a, b) => b.steps - a.steps);
@@ -64,7 +64,7 @@ const Leaderboard = () => {
       }));
 
       setLeaderboardData(rankedData); // Update the leaderboard data
-    }, 5000);
+    }, 3000);
 
     return () => clearInterval(interval); // Clear interval on component unmount
   }, [stepCount, username]);
