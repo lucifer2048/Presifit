@@ -1,70 +1,45 @@
-import React from 'react';
-import { View, TouchableOpacity, StyleSheet, SafeAreaView, } from 'react-native';
-import { List, Divider } from 'react-native-paper';
-// import ProfileScreen from "../screens/ProfileScreen"
-const SettingsSection = ({ title, options }) => {
-  return (
-    <View style={styles.section}>
-      <List.Section>
-        <List.Subheader style={styles.sectionTitle}>{title}</List.Subheader>
-        {options.map((option, index) => (
-          <TouchableOpacity key={index} style={styles.option}>
-            <List.Item title={option} />
-          </TouchableOpacity>
-        ))}
-      </List.Section>
-      <Divider />
-    </View>
-  );
-};
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button
+} from "react-native";
+import React, { useLayoutEffect, useEffect, useContext, useState } from "react";
+import { useNavigation, Link } from "@react-navigation/native";
+// import { Ionicons, AntDesign } from "@expo/vector-icons";
+// import axios from "axios";
+// import { UserType } from "../UserContext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const Settings = () => {
-  const profileOptions = ['Edit Profile', 'Change Password'];
-  const appOptions = ['Notifications', 'Language'];
-  const accountOptions = ['Logout', 'Delete Account'];
+const Logout = () => {
+  const navigation = useNavigation();
+  const logout = () => {
+      clearAuthToken();
 
+  };
+  const clearAuthToken = async () => {
+      await AsyncStorage.removeItem("authToken");
+      console.log("auth token cleared");
+      navigation.reset('Login')
+  };
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.content}>
-        <SettingsSection title="Profile" options={profileOptions} />
-        <SettingsSection title="App Preferences" options={appOptions} />
-        <SettingsSection title="Account Settings" options={accountOptions} />
+      <View style={styles.container}>
+          <Text style={styles.text}>Are you sure you want to logout?</Text>
+          <Button title="Logout" onPress={logout} />
       </View>
-    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#edf2f4',
-    marginBottom: 51
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
   },
-  content: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 10,
-  },
-  section: {
-    width: '100%',
-    backgroundColor: '#48cae4',
-    marginBottom: 10,
-    borderRadius: 10,
-    elevation: 5,
-    height: 200,
-    elevation: 10
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '500',
-    paddingLeft: 16,
-    paddingBottom: 8,
-    color: '#444',
-  },
-  option: {
-    paddingLeft: 16,
+  text: {
+      fontSize: 24,
+      marginBottom: 30,
   },
 });
 
-export default Settings;
+export default Logout;

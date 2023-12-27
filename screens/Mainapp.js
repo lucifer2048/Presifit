@@ -11,16 +11,15 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { Goals, Leaderboard, Community, Settings, Events, Rewards, Consultation, Company } from '../Components';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import Logout from './Logout';
+// import Logout from './Logout';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const THRESHOLD = 1.5;
 const STEP_DELAY = 500;
-
+const host = '192.168.1.79'
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
-const user = "healtier YOU";
 const goal = 1000;
 const screenOptions = {
   tabBarShowLabel: true,
@@ -64,12 +63,10 @@ export default function MainApp() {
     <NavigationContainer independent={true}>
       <Drawer.Navigator initialRouteName="Home">
         <Drawer.Screen name="Presifit" component={TabNavigator} />
-        <Drawer.Screen name="Settings" component={Settings} />
         <Drawer.Screen name="Consultation" component={Consultation} />
         <Drawer.Screen name="Events" component={Events} />
         <Drawer.Screen name="About us" component={Company} />
-        <Drawer.Screen name="Logout" component={Logout} />
-        {/* <Drawer.Screen name="ProfileScreen" component={ProfileScreen} /> */}
+        <Drawer.Screen name="LogOut" component={Settings} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
@@ -131,24 +128,30 @@ const TabNavigator = () => {
   );
 }
 
+
 const StepCounterScreen = () => {
   const [stepCount, setStepCount] = useState(0);
+  // const [userIdno, setUserIdno] = useState('');
   const [loaded, setLoaded] = useState(false);
+  const [username, setUsername] = useState("user");
   const Dist = stepCount / 1300;
   const DistanceCovered = Dist.toFixed(2);
   const cal = DistanceCovered * 60;
   const caloriesBurnt = cal.toFixed(2);
-  const userIdno = '65894af9bf356e01f52bf77a'
+  const userIdno = '658a7e5dcc19ff2c6317e2dd';
+  
+
 
   const sendStepDataToBackend = async (steps, userId) => {
     try {
-      const response = await fetch(`http://192.168.213.74:8000/steps/${userIdno}`, {
+      const response = await fetch(`http://${host}:8000/steps/${userIdno}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           userId,
+
           steps,
         }),
       });
@@ -166,33 +169,38 @@ const StepCounterScreen = () => {
 
   const fetchStepDataFromBackend = async (userIdno) => {
     try {
-      const response = await fetch(`http://192.168.213.74:8000/steps/${userIdno}`, {
+      const response = await fetch(`http://${host}:8000/steps/${userIdno}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
       });
-  
+
       if (!response.ok) {
         throw new Error('Error fetching step count data from backend');
       }
-  
-      const data = await response.json();
-      console.log('Step count data fetched from backend:', data);
-      return data.steps; // Assuming the steps data is structured as an object with a 'steps' property
+
+      const userData = await response.json();
+      console.log('User data fetched from backend:', userData);
+
+      const { username, steps } = userData; // Assuming the response has 'username' and 'steps' properties
+
+      return { username, steps };
+      // Assuming the steps data is structured as an object with a 'steps' property
     } catch (error) {
       console.error('Error fetching step count data from backend:', error);
       return 0; // Return default value or handle the error accordingly
     }
   };
 
-  const fetchSteps = async (userId) => {
-    const steps = await fetchStepDataFromBackend(userId);
-    setStepCount(steps);
+  const fetchUserDetails = async (userId) => {
+    const userDetails = await fetchStepDataFromBackend(userId);
+    setStepCount(userDetails.steps);
+    setUsername(userDetails.username); // Assuming you have a state variable for username
   };
-
+  
   useEffect(() => {
-    fetchSteps(userIdno);
+    fetchUserDetails(userIdno);
   }, []);
 
 
@@ -204,21 +212,30 @@ const StepCounterScreen = () => {
     }
   };
 
-  const loadStepCount = async () => {
-    try {
-      const storedSteps = await AsyncStorage.getItem('stepCount');
-      if (storedSteps !== null) {
-        setStepCount(JSON.parse(storedSteps));
+  useEffect(() => {
+    const loadStepCount = async () => {
+      try {
+        const storedSteps = await AsyncStorage.getItem('stepCount');
+        if (storedSteps !== null) {
+          setStepCount(JSON.parse(storedSteps));
+        }
+        setLoaded(true); // Move setting loaded state here
+      } catch (error) {
+        console.error('Error loading step count:', error);
       }
-      setLoaded(true);
-    } catch (error) {
-      console.error('Error loading step count:', error);
-    }
-  };
+    };
+
+    loadStepCount(); // Call loadStepCount inside the useEffect
+
+  }, []); // Ensure this effect runs only once on mount by passing an empty dependency array
 
   useEffect(() => {
-    loadStepCount();
-  }, []);
+    // Check if step count has been loaded from AsyncStorage before updating backend
+    if (loaded) {
+      sendStepDataToBackend(stepCount, userIdno); // Send updated step count to the backend
+      saveStepCount(stepCount); // Save step count in AsyncStorage
+    }
+  }, [stepCount, loaded]);
 
   useEffect(() => {
     let lastStepTime = new Date().getTime();
@@ -258,9 +275,10 @@ const StepCounterScreen = () => {
 
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 30 }}>
-      <Text style={{ fontSize: 32, fontWeight: '600', color: "#0466c8" }}>Hey, {user}</Text>
-      <Text style={{ fontSize: 24, marginTop: 30, marginLeft: "auto", marginRight: "auto", color: "#0466c8" }}>“Once you learn to quit, it becomes a habit.” – Vince Lombardi</Text>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 40 }}>
+      <Text style={{ fontSize: 32, fontWeight: '600', color: "#0466c8" }}>Hey, {username} </Text>
+      {/* <Text style={{ marginTop:10,fontSize: 28, fontWeight: '600', color: "#0466c8" }}>To a healthier you</Text> */}
+      <Text style={{ fontSize: 24, marginTop: 10, marginLeft: "auto", marginRight: "auto", color: "#0466c8" }}>“Once you learn to quit, it becomes a habit.”</Text>
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <CircularProgress
           value={stepCount}

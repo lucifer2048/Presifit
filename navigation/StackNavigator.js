@@ -4,7 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
-import Logout from "../screens/Logout";
+// import Logout from "../screens/Logout";
 // import HomeScreen from "../screens/HomeScreen";
 // import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 // import { Entypo } from "@expo/vector-icons";
@@ -18,6 +18,7 @@ import Logout from "../screens/Logout";
 // import ConfirmationScreen from "../screens/ConfirmationScreen";
 // import OrderScreen from "../screens/OrderScreen";
 import MainApp from "../screens/Mainapp";
+import { Settings } from "../Components";
 
 const StackNavigator = () => {
   const Stack = createNativeStackNavigator();
@@ -42,7 +43,7 @@ const StackNavigator = () => {
         />
         <Stack.Screen
           name="Logout"
-          component={Logout}
+          component={Settings}
           options={{ headerShown: false }}
         />
         {/* <Stack.Screen
