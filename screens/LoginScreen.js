@@ -20,6 +20,7 @@ import {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigation = useNavigation();
+    const host = '192.168.1.79'
     useEffect(() => {
       const checkLoginStatus = async () => {
         try {
@@ -41,7 +42,7 @@ import {
       };
   
       axios
-        .post("http://192.168.213.74:8000/login", user)
+        .post(`http://${host}:8000/login`, user)
         .then((response) => {
           console.log(response);
           const token = response.data.token;

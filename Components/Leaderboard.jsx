@@ -3,25 +3,71 @@ import { View, Text, FlatList, StyleSheet, SafeAreaView,Image } from 'react-nati
 
 const Leaderboard = () => {
   const [leaderboardData, setLeaderboardData] = useState([]);
+  const [stepCount, setStepCount] = useState(0);
+  const [username, setUsername] = useState("user");
+  const userIdno = '658a7e5dcc19ff2c6317e2dd';
+  const host = '192.168.1.79'
+
+  const fetchStepDataFromBackend = async (userIdno) => {
+    try {
+      const response = await fetch(`http://${host}:8000/steps/${userIdno}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Error fetching step count data from backend');
+      }
+
+      const userData = await response.json();
+      console.log('User data fetched from backend:', userData);
+
+      const { username, steps } = userData; // Assuming the response has 'username' and 'steps' properties
+
+      return { username, steps };
+      // Assuming the steps data is structured as an object with a 'steps' property
+    } catch (error) {
+      console.error('Error fetching step count data from backend:', error);
+      return 0; // Return default value or handle the error accordingly
+    }
+  };
+
+  const fetchUserDetails = async (userId) => {
+    const userDetails = await fetchStepDataFromBackend(userId);
+    setStepCount(userDetails.steps);
+    setUsername(userDetails.username); // Assuming you have a state variable for username
+  };
+  
+  useEffect(() => {
+    fetchUserDetails(userIdno);
+  }, []);
 
   useEffect(() => {
-    const initialData = [
-      { id: 1, name: 'Alice', steps: 7654,avatar: require('../images/alice.jpg') },
-      { id: 2, name: 'Bob', steps: 5432,avatar: require('../images/Bob.jpg') },
-      { id: 3, name: 'Charlie', steps: 9876,avatar: require('../images/charlie.jpg') },
-      
-    ];
+    // Second useEffect - Update initialData every 5 seconds
+    const interval = setInterval(async () => {
+      fetchUserDetails(userIdno); // Fetch updated user details
 
-    
-    const sortedData = initialData.sort((a, b) => b.steps - a.steps);
+      // Update leaderboardData with the latest username and stepCount
+      const updatedData = [
+        { id: 1, name: username, steps: stepCount, avatar: require('../images/alice.jpg') },
+        { id: 2, name: 'Bob', steps: 5555, avatar: require('../images/Bob.jpg') },
+        { id: 3, name: 'Charlie', steps: 9876, avatar: require('../images/charlie.jpg') },
+      ];
 
-    const rankedData = sortedData.map((user, index) => ({
-      ...user,
-      rank: index + 1,
-    }));
+      const sortedData = updatedData.sort((a, b) => b.steps - a.steps);
 
-    setLeaderboardData(rankedData);
-  }, []);
+      const rankedData = sortedData.map((user, index) => ({
+        ...user,
+        rank: index + 1,
+      }));
+
+      setLeaderboardData(rankedData); // Update the leaderboard data
+    }, 5000);
+
+    return () => clearInterval(interval); // Clear interval on component unmount
+  }, [stepCount, username]);
 
   const renderLeaderboardItem = ({ item }) => {
     return (
