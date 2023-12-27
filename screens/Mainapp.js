@@ -11,7 +11,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { Goals, Leaderboard, Community, Settings, Events, Rewards, Consultation, Company } from '../Components';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-// import Logout from './Logout';
+import Logout from '../screens/Logout';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -66,7 +66,7 @@ export default function MainApp() {
         <Drawer.Screen name="Consultation" component={Consultation} />
         <Drawer.Screen name="Events" component={Events} />
         <Drawer.Screen name="About us" component={Company} />
-        <Drawer.Screen name="LogOut" component={Settings} />
+        <Drawer.Screen name="LogOut" component={Logout} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
