@@ -9,13 +9,15 @@ import { useNavigation } from "@react-navigation/native";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const Logout = ({ navigation }) => {
-  // const navigation = useNavigation();
+const Logout = () => {
+  const navigation = useNavigation();
 
   const onPressHandler = () => {
     // Execute multiple functions here
     logout();
     // navigateToLogin();
+    navigation.goBack();
+    // navigation.navigate("Login")
   };
   const logout = async () => {
     try {

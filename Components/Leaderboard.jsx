@@ -5,7 +5,7 @@ const Leaderboard = () => {
   const [leaderboardData, setLeaderboardData] = useState([]);
   const [stepCount, setStepCount] = useState(0);
   const [username, setUsername] = useState("user");
-  const userIdno = '658a7e5dcc19ff2c6317e2dd';
+  const userIdno = '65894af9bf356e01f52bf77a';
   const host = '192.168.1.79'
 
   const fetchStepDataFromBackend = async (userIdno) => {
@@ -51,9 +51,11 @@ const Leaderboard = () => {
 
       // Update leaderboardData with the latest username and stepCount
       const updatedData = [
-        { id: 1, name: 'Alice', steps: 35, avatar: require('../images/alice.jpg') },
-        { id: 2, name: 'Bob', steps: 555, avatar: require('../images/charlie.jpg') },
+        { id: 1, name: 'Afreen', steps: 15, avatar: require('../images/alice.jpg') },
+        { id: 2, name: 'Sushruth', steps: 555, avatar: require('../images/charlie.jpg') },
         { id: 3, name: username, steps: stepCount, avatar: require('../images/Bob.jpg') },
+        { id: 4, name: 'Akash V', steps: 555, avatar: require('../images/akashv.jpg') },
+        { id: 5, name: 'Akash R', steps: 234, avatar: require('../images/akashR.jpg') },
       ];
 
       const sortedData = updatedData.sort((a, b) => b.steps - a.steps);
@@ -107,6 +109,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
+    paddingBottom:0,
+    marginBottom:50
     
   },
   container: {
@@ -116,7 +120,7 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontSize: 24,
-    fontWeight: '600',
+    fontWeight: '400',
     marginBottom: 20,
     
   },
@@ -124,12 +128,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-evenly',
-    borderRadius: 8,
+    borderRadius: 20,
     padding: 12,
     marginBottom: 20,
     width: '100%',
     backgroundColor: '#48cae4',
-    height:150,
+    height:145,
     elevation:8
   },
   rankCard: {
@@ -143,8 +147,8 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
   avatar: {
-    width: 60,
-    height: 60,
+    width: 80,
+    height: 80,
     borderRadius: 50,
     marginRight: 10,
     resizeMode:"cover"
@@ -156,7 +160,7 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: '600',
   },
   steps: {
     color: '#072ac8',

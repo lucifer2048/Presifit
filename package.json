@@ -17,6 +17,7 @@
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.17",
     "@reduxjs/toolkit": "^2.0.1",
+    "@yfuks/react-native-action-sheet": "^0.0.5",
     "axios": "^1.6.2",
     "bcrypt": "^5.1.1",
     "expo": "^49.0.21",
