@@ -20,7 +20,7 @@ const STEP_DELAY = 500;
 const host = '192.168.1.79'
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
-const goal = 1000;
+const goal = 10000;
 const screenOptions = {
   tabBarShowLabel: true,
   tabBarHideOnKeyboard: true,
@@ -130,6 +130,7 @@ const TabNavigator = () => {
 
 
 const StepCounterScreen = () => {
+
   const [stepCount, setStepCount] = useState(0);
   // const [userIdno, setUserIdno] = useState('');
   const [loaded, setLoaded] = useState(false);
@@ -138,8 +139,8 @@ const StepCounterScreen = () => {
   const DistanceCovered = Dist.toFixed(2);
   const cal = DistanceCovered * 60;
   const caloriesBurnt = cal.toFixed(2);
-  const userIdno = '658a7e5dcc19ff2c6317e2dd';
-  
+  const userIdno = '65894af9bf356e01f52bf77a';
+
 
 
   const sendStepDataToBackend = async (steps, userId) => {
@@ -169,6 +170,7 @@ const StepCounterScreen = () => {
 
   const fetchStepDataFromBackend = async (userIdno) => {
     try {
+
       const response = await fetch(`http://${host}:8000/steps/${userIdno}`, {
         method: 'GET',
         headers: {
@@ -181,7 +183,7 @@ const StepCounterScreen = () => {
       }
 
       const userData = await response.json();
-      console.log('User data fetched from backend:', userData);
+
 
       const { username, steps } = userData; // Assuming the response has 'username' and 'steps' properties
 
@@ -198,7 +200,7 @@ const StepCounterScreen = () => {
     setStepCount(userDetails.steps);
     setUsername(userDetails.username); // Assuming you have a state variable for username
   };
-  
+
   useEffect(() => {
     fetchUserDetails(userIdno);
   }, []);
@@ -276,14 +278,14 @@ const StepCounterScreen = () => {
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 40 }}>
-      <Text style={{ fontSize: 32, fontWeight: '600', color: "#0466c8" }}>Hey, {username} </Text>
+      <Text style={{ fontSize: 40, fontWeight: '600', color: "#999" }}>Hey, {username} </Text>
       {/* <Text style={{ marginTop:10,fontSize: 28, fontWeight: '600', color: "#0466c8" }}>To a healthier you</Text> */}
       <Text style={{ fontSize: 24, marginTop: 10, marginLeft: "auto", marginRight: "auto", color: "#0466c8" }}>“Once you learn to quit, it becomes a habit.”</Text>
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <CircularProgress
           value={stepCount}
           maxValue={goal}
-          radius={120}
+          radius={140}
           textColor={"#0466c8"}
           activeStrokeColor={"#bfd200"}
           inActiveStrokeColor={"#84dcc6"}
