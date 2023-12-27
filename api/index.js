@@ -19,8 +19,6 @@ app.listen(port, () => {
 
 mongoose
   .connect("mongodb+srv://panickerprathyush:lucifer@cluster0.k3xmzvt.mongodb.net/", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
   })
   .then(() => {
     console.log("Connected to MongoDB");
